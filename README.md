@@ -23,7 +23,8 @@ A modern, secure password manager built with .NET 8 and WPF, following SOLID pri
   - Credit cards (cardholder, number, expiry, CVV)
   - Secure notes
   - Custom file attachments
-- **Search & Filter**: Quickly find entries by title, username, or type
+- **Enhanced Search Bar**: Real-time search with icon and placeholder text - filter entries by title or username as you type
+- **Type Filters**: Quickly filter by entry type (All, Login, Credit Card, Notes, Files)
 - **Favorites**: Mark important entries for quick access
 
 ### 🛠️ Password Tools

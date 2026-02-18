@@ -29,7 +29,7 @@
 - **New Vault**: Create a new vault to organize entries
 
 ### Content Area
-- **Search Bar**: Search entries by title or username
+- **Search Bar**: Enhanced search with icon and placeholder text - search entries by title or username in real-time
 - **Filter Buttons**: Filter by entry type (All, Login, Credit Card, Notes, Files)
 - **Entries List**: Click on any entry to view/edit details
 

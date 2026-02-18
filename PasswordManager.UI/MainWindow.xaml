@@ -101,11 +101,63 @@
                 </Grid.RowDefinitions>
 
                 <!-- Search Bar -->
-                <TextBox x:Name="SearchBox" 
-                        Grid.Row="0"
-                        Style="{StaticResource ModernTextBox}"
-                        TextChanged="SearchBox_TextChanged"
-                        Margin="0,0,0,15"/>
+                <Grid Grid.Row="0" Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border Grid.Column="0" Grid.ColumnSpan="2"
+                            Background="{StaticResource SurfaceBrush}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Search Icon -->
+                            <TextBlock Grid.Column="0" 
+                                      Text="🔍" 
+                                      FontSize="16"
+                                      VerticalAlignment="Center"
+                                      Margin="12,0,8,0"
+                                      Foreground="{StaticResource SecondaryBrush}"/>
+                            
+                            <!-- Search TextBox -->
+                            <TextBox x:Name="SearchBox" 
+                                    Grid.Column="1"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    Padding="0,10,12,10"
+                                    FontSize="14"
+                                    TextChanged="SearchBox_TextChanged"
+                                    VerticalAlignment="Center"/>
+                            
+                            <!-- Placeholder Text -->
+                            <TextBlock Grid.Column="1"
+                                      Text="Search passwords by title or username..."
+                                      FontSize="14"
+                                      Foreground="{StaticResource SecondaryBrush}"
+                                      Padding="0,10,12,10"
+                                      VerticalAlignment="Center"
+                                      IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=SearchBox, Path=Text}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </Grid>
 
                 <!-- Filter Buttons -->
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
