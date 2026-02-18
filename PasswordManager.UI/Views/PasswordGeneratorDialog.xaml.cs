@@ -65,6 +65,14 @@ public partial class PasswordGeneratorDialog : Window
         }
     }
 
+    private void CheckBox_Changed(object sender, RoutedEventArgs e)
+    {
+        if (IsLoaded)
+        {
+            GenerateNewPassword();
+        }
+    }
+
     private void RegenerateButton_Click(object sender, RoutedEventArgs e)
     {
         GenerateNewPassword();

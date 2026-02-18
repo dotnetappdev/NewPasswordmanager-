@@ -214,6 +214,16 @@ public partial class EntryDialog : Window
         }
     }
 
+    private void PasswordBoxControl_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        UpdatePasswordStrength();
+    }
+
+    private void PasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        UpdatePasswordStrength();
+    }
+
     private void AttachFileButton_Click(object sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog

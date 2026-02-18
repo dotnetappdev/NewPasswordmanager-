@@ -51,10 +51,12 @@
                         <TextBox x:Name="PasswordTextBox" 
                                 Grid.Column="0"
                                 Style="{StaticResource ModernTextBox}"
+                                TextChanged="PasswordTextBox_TextChanged"
                                 Visibility="Collapsed"/>
                         <PasswordBox x:Name="PasswordBoxControl" 
                                     Grid.Column="0"
-                                    Style="{StaticResource ModernPasswordBox}"/>
+                                    Style="{StaticResource ModernPasswordBox}"
+                                    PasswordChanged="PasswordBoxControl_PasswordChanged"/>
                         <Button Grid.Column="1" 
                                Content="👁" 
                                Style="{StaticResource IconButton}"
