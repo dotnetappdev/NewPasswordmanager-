@@ -168,10 +168,10 @@ After capturing all screenshots:
 - Leave some padding around edges
 
 ### Timing
-- Capture during daylight hours (better screen clarity)
-- Allow animations to complete
+- Allow all UI animations to complete
 - Ensure focus is on the correct window
 - Wait for all elements to load
+- Take time to review each screenshot before moving to the next
 
 ### Content
 - Use example.com for URLs

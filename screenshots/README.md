@@ -79,6 +79,6 @@ Use these pre-created demo accounts for screenshots:
 - Close unnecessary background windows
 - Ensure the application is in focus
 - Use consistent window sizes
-- Capture during the day for better screen clarity
 - Disable notifications that might appear in screenshots
+- Allow all UI animations to complete before capturing
 - Use the Windows + Shift + S shortcut for quick, clean captures
