@@ -327,6 +327,37 @@ User Account
 - Configuration files
 - Important documents
 
+### 5. Passkey
+
+**Fields:**
+```
+┌─────────────────────────────────────────────┐
+│ Entry Type: Passkey                         │
+│─────────────────────────────────────────────│
+│ Title:                Example.com Account   │
+│ Relying Party ID:     example.com           │
+│ Relying Party Name:   Example Website       │
+│ User Display Name:    john.doe              │
+│ User Handle:          dGVzdHVzZXI=          │
+│ [Generate Passkey Credential]               │
+│ ✓ Passkey credential generated              │
+│ Notes:       WebAuthn passkey for example   │
+└─────────────────────────────────────────────┘
+```
+
+**Use Cases:**
+- WebAuthn passkeys for websites
+- FIDO2 authentication credentials
+- Passwordless authentication
+- Multi-factor authentication
+
+**Technical Details:**
+- Uses RSA 2048-bit cryptographic key pairs
+- Private keys encrypted with AES-256 using master password
+- Credential ID and public key stored for authentication
+- Counter field for replay attack prevention
+- Secure random user handle generation
+
 ---
 
 ## 👥 Account Management & Access Control

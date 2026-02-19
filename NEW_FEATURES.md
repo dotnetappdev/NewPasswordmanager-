@@ -1,4 +1,46 @@
-# New Features - Seed Data & Theme Support
+# New Features - Passkeys, Seed Data & Theme Support
+
+## 🔑 Passkey Support (WebAuthn)
+
+### Generate and Store Passkey Credentials
+
+The password manager now supports **passkeys** (WebAuthn credentials), enabling you to store cryptographic credentials for passwordless authentication.
+
+**What are Passkeys?**
+- Modern replacement for passwords using public-key cryptography
+- More secure than traditional passwords (resistant to phishing, credential stuffing)
+- Used by major platforms (Google, Apple, Microsoft, GitHub, etc.)
+- Based on FIDO2/WebAuthn standards
+
+**How to Create a Passkey Entry:**
+
+1. **Select a vault** and click "New Entry"
+2. **Choose "Passkey"** as the Entry Type
+3. **Fill in the details:**
+   ```
+   Title:              Your App/Site Name
+   Relying Party ID:   example.com
+   Relying Party Name: Example Website
+   User Display Name:  john.doe
+   User Handle:        (auto-generated or custom)
+   ```
+4. **Click "Generate Passkey Credential"**
+5. **Save the entry** - The private key is encrypted and stored securely
+
+**Security Features:**
+- RSA 2048-bit cryptographic key pairs
+- Private keys encrypted with AES-256 using your master password
+- Secure random credential and user handle generation
+- Credential counter for replay attack prevention
+- Public/private key separation (only private key is encrypted)
+
+**Use Cases:**
+- Store WebAuthn credentials for websites
+- Backup passkeys for critical accounts
+- Manage FIDO2 authentication across devices
+- Passwordless authentication workflows
+
+---
 
 ## Demo Users (Seed Data)
 

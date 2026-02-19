@@ -35,8 +35,9 @@ A modern, secure password manager built with .NET 8 and WPF, following SOLID pri
   - Credit cards (cardholder, number, expiry, CVV)
   - Secure notes
   - Custom file attachments
+  - **Passkeys (WebAuthn)** - Store cryptographic credentials for passwordless authentication
 - **Enhanced Search Bar**: Real-time search with icon and placeholder text - filter entries by title or username as you type
-- **Type Filters**: Quickly filter by entry type (All, Login, Credit Card, Notes, Files)
+- **Type Filters**: Quickly filter by entry type (All, Login, Credit Card, Notes, Passkeys, Files)
 - **Favorites**: Mark important entries for quick access
 
 ### 🛠️ Password Tools
@@ -60,8 +61,8 @@ The application follows SOLID principles with a clean separation of concerns:
 ### Projects
 1. **PasswordManager.Core** - Business logic and domain models
    - Models: User, Vault, PasswordEntry, AccessRestriction
-   - Services: EncryptionService, PasswordGeneratorService
-   - Interfaces: IEncryptionService, IPasswordGeneratorService
+   - Services: EncryptionService, PasswordGeneratorService, PasskeyService
+   - Interfaces: IEncryptionService, IPasswordGeneratorService, IPasskeyService
 
 2. **PasswordManager.Data** - Data access layer
    - Entity Framework Core with SQLite
