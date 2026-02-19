@@ -128,6 +128,12 @@ public partial class MainWindow : Window
         await LoadEntriesAsync();
     }
 
+    private async void FilterPasskeys_Click(object sender, RoutedEventArgs e)
+    {
+        _currentFilter = EntryType.Passkey;
+        await LoadEntriesAsync();
+    }
+
     private async void FilterFiles_Click(object sender, RoutedEventArgs e)
     {
         _currentFilter = EntryType.CustomFile;
