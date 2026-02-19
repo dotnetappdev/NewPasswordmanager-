@@ -36,6 +36,12 @@ public partial class LoginWindow : Window
     {
         await _databaseService.InitializeDatabaseAsync();
         await LoadUsersAsync();
+
+        // If no accounts exist yet, automatically show the create-account form
+        if (UserComboBox.Items.Count == 0)
+        {
+            CreateAccountButton_Click(this, new RoutedEventArgs());
+        }
     }
 
     private async Task LoadUsersAsync()
@@ -116,7 +122,17 @@ public partial class LoginWindow : Window
     {
         if (!_masterKeyService.HasMasterKey())
         {
-            MessageBox.Show("No master key is configured. Set one in Settings.", "Master Key", MessageBoxButton.OK, MessageBoxImage.Information);
+            var result = MessageBox.Show(
+                "No master key is configured.\n\nWould you like to set one now?",
+                "Set Up Master Key",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var setup = new SetMasterKeyDialog(_masterKeyService) { Owner = this };
+                setup.ShowDialog();
+            }
             return;
         }
 
