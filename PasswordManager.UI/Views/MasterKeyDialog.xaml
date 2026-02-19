@@ -1,22 +1,55 @@
 <Window x:Class="PasswordManager.UI.Views.MasterKeyDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Master Key" Height="200" Width="400" WindowStartupLocation="CenterOwner"
-        Background="{StaticResource BackgroundBrush}">
+        Title="Unlock Password Manager" Height="340" Width="480" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        ResizeMode="NoResize">
 
-    <Grid Margin="16">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="340">
 
-        <TextBlock Text="Enter Master Key" FontSize="16" FontWeight="SemiBold"/>
-        <PasswordBox x:Name="MasterKeyBox" Grid.Row="1" Style="{StaticResource ModernPasswordBox}" Margin="0,10,0,10"/>
+            <!-- Lock icon -->
+            <TextBlock Text="🔐" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Content="Cancel" Style="{StaticResource SecondaryButton}" Click="Cancel_Click" Margin="0,0,8,0"/>
-            <Button Content="Unlock" Style="{StaticResource PrimaryButton}" Click="Unlock_Click"/>
+            <TextBlock Text="Password Manager" 
+                       FontSize="22" FontWeight="Bold"
+                       Foreground="{StaticResource TextBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,6"/>
+
+            <TextBlock Text="Enter your master key to unlock" 
+                       FontSize="13"
+                       Foreground="{StaticResource SecondaryBrush}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,24"/>
+
+            <!-- Master Key input -->
+            <PasswordBox x:Name="MasterKeyBox" 
+                         Style="{StaticResource ModernPasswordBox}"
+                         Margin="0,0,0,8"/>
+
+            <!-- Error Message -->
+            <TextBlock x:Name="ErrorText"
+                       Foreground="{StaticResource DangerBrush}"
+                       FontSize="12"
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,12"
+                       Visibility="Collapsed"/>
+
+            <!-- Unlock button -->
+            <Button Content="Unlock" 
+                    Style="{StaticResource PrimaryButton}"
+                    Click="Unlock_Click"
+                    Height="40"
+                    Margin="0,0,0,12"/>
+
+            <!-- Cancel link-style button -->
+            <Button Content="Cancel" 
+                    Style="{StaticResource IconButton}"
+                    Click="Cancel_Click"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource SecondaryBrush}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -24,7 +24,7 @@ public partial class MasterKeyDialog : Window
         var key = MasterKeyBox.Password;
         if (string.IsNullOrWhiteSpace(key))
         {
-            MessageBox.Show("Please enter the master key.", "Master Key", MessageBoxButton.OK, MessageBoxImage.Warning);
+            ShowError("Please enter the master key.");
             return;
         }
 
@@ -35,7 +35,13 @@ public partial class MasterKeyDialog : Window
         }
         else
         {
-            MessageBox.Show("Master key is invalid.", "Master Key", MessageBoxButton.OK, MessageBoxImage.Error);
+            ShowError("Master key is invalid. Please try again.");
         }
+    }
+
+    private void ShowError(string message)
+    {
+        ErrorText.Text = message;
+        ErrorText.Visibility = Visibility.Visible;
     }
 }
