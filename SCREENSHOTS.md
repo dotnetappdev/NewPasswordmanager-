@@ -1,426 +1,409 @@
 # Password Manager - Visual Documentation & Screenshots
 
-## Application Screenshots & UI Mockups
+This document provides high-quality screenshots of all screens and features in the Password Manager application.
 
-Since this is a Windows WPF application, here are detailed visual representations of each screen:
-
----
-
-## 1. Login Screen
-
-### Layout
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                                                                             │
-│  ┌──────────────────┐                    ┌────────────────────────────┐    │
-│  │                  │                    │                            │    │
-│  │                  │                    │  Welcome Back              │    │
-│  │      🔐         │                    │                            │    │
-│  │  Password       │                    │  Select your account to    │    │
-│  │   Manager       │                    │  continue                  │    │
-│  │                  │                    │                            │    │
-│  │   Secure.       │                    │  Account                   │    │
-│  │   Simple.       │                    │  ┌──────────────────────┐  │    │
-│  │   Modern.       │                    │  │ [Select Account ▼]   │  │    │
-│  │                  │                    │  └──────────────────────┘  │    │
-│  │                  │                    │                            │    │
-│  │    [Primary     │                    │  Password                  │    │
-│  │     Blue BG]    │                    │  ┌──────────────────────┐  │    │
-│  │                  │                    │  │ ••••••••••••••••••   │  │    │
-│  │                  │                    │  └──────────────────────┘  │    │
-│  │                  │                    │                            │    │
-│  │                  │                    │  ┌──────────────────────┐  │    │
-│  │                  │                    │  │    Sign In           │  │    │
-│  │                  │                    │  └──────────────────────┘  │    │
-│  │                  │                    │                            │    │
-│  │                  │                    │  ┌──────────────────────┐  │    │
-│  │                  │                    │  │ Create New Account   │  │    │
-│  └──────────────────┘                    │  └──────────────────────┘  │    │
-│                                          └────────────────────────────┘    │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Features
-- Left panel with branding and lock icon
-- Right panel with account selection dropdown
-- Password input field
-- Sign in and create account buttons
-- Clean, modern design
+> **Note**: All screenshots use demo data. Never screenshot real passwords or sensitive information.
 
 ---
 
-## 2. Create Account Dialog
-
-### Layout
-```
-┌───────────────────────────────────────────────────────┐
-│  Create New Account                                   │
-│                                                       │
-│  Username                                             │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │                                                 │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                       │
-│  Password                                             │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │ ••••••••••••                                    │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                       │
-│  Confirm Password                                     │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │ ••••••••••••                                    │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                       │
-│  Account Type                                         │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │ User                                         ▼  │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                       │
-│  ┌────────────────┐  ┌──────────────────────────┐   │
-│  │    Cancel      │  │  Create Account          │   │
-│  └────────────────┘  └──────────────────────────┘   │
-└───────────────────────────────────────────────────────┘
-```
-
-### Features
-- Username input
-- Password fields with validation
-- Account type selection (Admin/User/Child)
-- Form validation
+## Table of Contents
+- [Main Screens](#main-screens)
+- [Dialogs](#dialogs)
+- [Features & Functionality](#features--functionality)
+- [Themes](#themes)
+- [Account Types & Permissions](#account-types--permissions)
+- [How to Capture Screenshots](#how-to-capture-screenshots)
 
 ---
 
-## 3. Main Window
+## Main Screens
 
-### Layout
-```
-┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│  🔐 Password Manager              Username (Admin) │ Settings │ Logout │               │
-├────────────────┬────────────────────────────────────────────────────────────────────────┤
-│                │                                                                        │
-│ ┌────────────┐ │  ┌──────────────────────────────────────────────────────────────────┐ │
-│ │+ New Entry │ │  │ 🔍 Search passwords by title or username...                     │ │
-│ └────────────┘ │  └──────────────────────────────────────────────────────────────────┘ │
-│                │                                                                        │
-│   VAULTS       │  [ All ] [ Login ] [ Credit Card ] [ Secure Notes ] [ Files ]        │
-│                │                                                                        │
-│ ┌────────────┐ │  ┌──────────────────────────────────────────────────────────────────┐ │
-│ │ Personal   │ │  │  GitHub Login                                        ⭐           │ │
-│ │ My personal│ │  │  Login                                                            │ │
-│ │ vault      │ │  │  username@email.com                                               │ │
-│ └────────────┘ │  └──────────────────────────────────────────────────────────────────┘ │
-│                │                                                                        │
-│ ┌────────────┐ │  ┌──────────────────────────────────────────────────────────────────┐ │
-│ │ Work       │ │  │  Corporate Email                                                  │ │
-│ │ Work-related│ │  │  Login                                                            │ │
-│ └────────────┘ │  │  john.doe@company.com                                             │ │
-│                │  └──────────────────────────────────────────────────────────────────┘ │
-│ ┌────────────┐ │                                                                        │
-│ │+ New Vault │ │  ┌──────────────────────────────────────────────────────────────────┐ │
-│ └────────────┘ │  │  Credit Card - Visa                                               │ │
-│                │  │  CreditCard                                                        │ │
-│                │  │  •••• 4532                                                         │ │
-│                │  └──────────────────────────────────────────────────────────────────┘ │
-│                │                                                                        │
-└────────────────┴────────────────────────────────────────────────────────────────────────┘
-```
+### 1. Login Window
+**File**: `screenshots/01-login-window.png`
 
-### Features
-- Sidebar with vaults list
-- Enhanced search bar with icon and placeholder
-- Filter buttons for entry types
-- Password entries displayed as cards
-- Click to view/edit entries
+The login screen is the entry point to the application with a modern two-panel design:
+- **Left Panel**: Branding with lock icon and tagline "Secure. Simple. Modern."
+- **Right Panel**: Account selection and authentication
+  - Account dropdown (Netflix-style user selection)
+  - Password input field
+  - Sign In button
+  - Create New Account button
+
+**Demo Accounts**:
+- Admin: `admin` / `Admin123!`
+- User: `john` / `John123!`
+- Child: `sarah` / `Sarah123!`
+
+![Login Window](screenshots/01-login-window.png)
 
 ---
 
-## 4. Password Entry Dialog - Login Type
+### 2. Create Account Dialog
+**File**: `screenshots/02-create-account-dialog.png`
 
-### Layout
-```
-┌───────────────────────────────────────────────────────────────────┐
-│  New Entry                                                        │
-│                                                                   │
-│  Entry Type                                                       │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │ Login                                                    ▼  │ │
-│  └─────────────────────────────────────────────────────────────┘ │
-│                                                                   │
-│  Title                                                            │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │ GitHub Login                                                │ │
-│  └─────────────────────────────────────────────────────────────┘ │
-│                                                                   │
-│  Username                                                         │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │ myusername                                                  │ │
-│  └─────────────────────────────────────────────────────────────┘ │
-│                                                                   │
-│  Email                                                            │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │ user@example.com                                            │ │
-│  └─────────────────────────────────────────────────────────────┘ │
-│                                                                   │
-│  Password                                                         │
-│  ┌─────────────────────────────────────┐ │ 👁 │ │ 📋 │          │
-│  │ ••••••••••••••••••••               │ │    │ │    │          │
-│  └─────────────────────────────────────┘ └────┘ └────┘          │
-│                                                                   │
-│  [ Generate Password ]  [████████████░░] Strong                  │
-│                                                                   │
-│  URL                                                              │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │ https://github.com                                          │ │
-│  └─────────────────────────────────────────────────────────────┘ │
-│                                                                   │
-│  Notes                                                            │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │ My personal GitHub account                                  │ │
-│  │                                                             │ │
-│  └─────────────────────────────────────────────────────────────┘ │
-│                                                                   │
-│  ☐ Mark as Favorite                                              │
-│                                                                   │
-│  ┌─────────┐  ┌─────────┐  ┌──────────────────────────────┐     │
-│  │ Cancel  │  │ Delete  │  │         Save                 │     │
-│  └─────────┘  └─────────┘  └──────────────────────────────┘     │
-└───────────────────────────────────────────────────────────────────┘
-```
+Dialog for creating a new user account:
+- Username input field
+- Password input field with validation
+- Confirm Password field
+- Account Type dropdown (Admin/User/Child)
+- Create Account and Cancel buttons
 
-### Features
-- Entry type selector
-- All login fields
-- Password reveal (👁) and copy (📋) buttons
-- Password generator button
-- Real-time password strength indicator
+![Create Account Dialog](screenshots/02-create-account-dialog.png)
+
+---
+
+### 3. Main Window - Overview
+**File**: `screenshots/03-main-window-overview.png`
+
+The main application interface after login:
+- **Top Bar**: Application title, username display, Settings and Logout buttons
+- **Sidebar** (left):
+  - New Entry button
+  - Vaults list
+  - New Vault button
+- **Content Area** (right):
+  - Search bar with icon
+  - Type filter buttons (All, Login, Credit Card, Notes, Files)
+  - Password entries list
+
+![Main Window Overview](screenshots/03-main-window-overview.png)
+
+---
+
+### 4. Main Window - With Entries
+**File**: `screenshots/04-main-window-with-entries.png`
+
+Main window showing populated password entries:
+- Multiple vault entries displayed
+- Different entry types (logins, credit cards, notes)
+- Entry details preview
+- Favorites marked with star icon
+
+![Main Window with Entries](screenshots/04-main-window-with-entries.png)
+
+---
+
+## Dialogs
+
+### 5. Entry Dialog - Login Credentials
+**File**: `screenshots/05-entry-dialog-login.png`
+
+Dialog for creating/editing login credentials:
+- Title field
+- Username field
+- Email field
+- Password field with:
+  - Reveal/Hide toggle (eye icon)
+  - Copy button
+  - Generate Password button
+  - Strength indicator
+- URL field
+- Notes field (multiline)
+- Favorite checkbox
+- Save and Cancel buttons
+
+![Login Entry Dialog](screenshots/05-entry-dialog-login.png)
+
+---
+
+### 6. Entry Dialog - Credit Card
+**File**: `screenshots/06-entry-dialog-credit-card.png`
+
+Dialog for storing credit card information:
+- Title field
+- Cardholder Name
+- Card Number (encrypted)
+- Expiry Date (MM/YY format)
+- CVV (encrypted)
 - Notes field
 - Favorite checkbox
-- Save/Delete/Cancel buttons
+- Save and Cancel buttons
+
+![Credit Card Entry Dialog](screenshots/06-entry-dialog-credit-card.png)
 
 ---
 
-## 5. Password Generator Dialog
+### 7. Entry Dialog - Secure Note
+**File**: `screenshots/07-entry-dialog-secure-note.png`
 
-### Layout
-```
-┌─────────────────────────────────────────────────────┐
-│  Password Generator                                 │
-│                                                     │
-│  ┌─────────────────────────────────────────────────┐│
-│  │ Xy9$mK#pL2qR!vT8                                ││
-│  └─────────────────────────────────────────────────┘│
-│                                                     │
-│  Password Length                              16    │
-│  ├────────●─────────────────────────────────┤       │
-│  8                                          64      │
-│                                                     │
-│  ☑ Include Uppercase (A-Z)                         │
-│  ☑ Include Lowercase (a-z)                         │
-│  ☑ Include Numbers (0-9)                           │
-│  ☑ Include Special Characters (!@#$...)            │
-│                                                     │
-│  Password Strength                                  │
-│  [████████████████████████░░░] Strong               │
-│                                                     │
-│  ┌────────────┐ ┌──────┐ ┌──────────────────┐      │
-│  │ Regenerate │ │ Copy │ │  Use Password    │      │
-│  └────────────┘ └──────┘ └──────────────────┘      │
-└─────────────────────────────────────────────────────┘
-```
+Dialog for creating secure text notes:
+- Title field
+- Large multiline text area for notes
+- Favorite checkbox
+- Save and Cancel buttons
 
-### Features
+![Secure Note Dialog](screenshots/07-entry-dialog-secure-note.png)
+
+---
+
+### 8. Entry Dialog - File Attachment
+**File**: `screenshots/08-entry-dialog-file.png`
+
+Dialog for attaching and storing files:
+- Title field
+- File selection button
+- File name display
+- Notes field
+- Favorite checkbox
+- Save and Cancel buttons
+
+![File Entry Dialog](screenshots/08-entry-dialog-file.png)
+
+---
+
+### 9. Password Generator Dialog
+**File**: `screenshots/09-password-generator-dialog.png`
+
+Password generator tool:
 - Generated password display
-- Length slider (8-64 characters)
-- Character type checkboxes (auto-regenerate on change)
+- Password length slider (8-64 characters)
+- Character type options:
+  - Uppercase letters (A-Z)
+  - Lowercase letters (a-z)
+  - Numbers (0-9)
+  - Special characters (!@#$%^&*)
 - Password strength indicator
-- Regenerate, Copy, and Use buttons
+- Generate button
+- Copy to Clipboard button
+- Use This Password button
+
+![Password Generator Dialog](screenshots/09-password-generator-dialog.png)
 
 ---
 
-## 6. Settings Dialog
+### 10. Vault Dialog
+**File**: `screenshots/10-vault-dialog.png`
 
-### Layout
-```
-┌────────────────────────────────────────────────────────────┐
-│  Settings                                                  │
-│                                                            │
-│  Account Information                                       │
-│                                                            │
-│  Username:        johndoe                                 │
-│  Account Type:    Admin                                   │
-│  Created:         February 18, 2026                       │
-│                                                            │
-│  ─────────────────────────────────────────────────────    │
-│                                                            │
-│  Change Password                                           │
-│                                                            │
-│  Current Password                                          │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │ ••••••••••••                                       │   │
-│  └────────────────────────────────────────────────────┘   │
-│                                                            │
-│  New Password                                              │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │ ••••••••••••                                       │   │
-│  └────────────────────────────────────────────────────┘   │
-│                                                            │
-│  Confirm New Password                                      │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │ ••••••••••••                                       │   │
-│  └────────────────────────────────────────────────────┘   │
-│                                                            │
-│  ┌──────────────────┐                                     │
-│  │ Update Password  │                                     │
-│  └──────────────────┘                                     │
-│                                                            │
-│  ─────────────────────────────────────────────────────    │
-│                                                            │
-│  Database Information                                      │
-│                                                            │
-│  Database Location:                                        │
-│  C:\Users\John\AppData\Roaming\PasswordManager\           │
-│  passwordmanager.db                                        │
-│                                                            │
-│                                      ┌────────┐            │
-│                                      │ Close  │            │
-│                                      └────────┘            │
-└────────────────────────────────────────────────────────────┘
-```
+Dialog for creating/editing vaults:
+- Vault name field
+- Description field
+- Color selection (for organization)
+- Save and Cancel buttons
 
-### Features
-- Account information display
-- Password change form
-- Database location info
-- Clean settings layout
+![Vault Dialog](screenshots/10-vault-dialog.png)
 
 ---
 
-## 7. Credit Card Entry Type
+### 11. Settings Dialog
+**File**: `screenshots/11-settings-dialog.png`
 
-### Layout
-```
-┌───────────────────────────────────────────────────────────┐
-│  New Entry                                                │
-│                                                           │
-│  Entry Type                                               │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │ Credit Card                                      ▼  │ │
-│  └─────────────────────────────────────────────────────┘ │
-│                                                           │
-│  Title                                                    │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │ Visa Card                                           │ │
-│  └─────────────────────────────────────────────────────┘ │
-│                                                           │
-│  Cardholder Name                                          │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │ John Doe                                            │ │
-│  └─────────────────────────────────────────────────────┘ │
-│                                                           │
-│  Card Number                                              │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │ 4532 1234 5678 9012                                 │ │
-│  └─────────────────────────────────────────────────────┘ │
-│                                                           │
-│  Expiry Date (MM/YY)         CVV                          │
-│  ┌────────────────────────┐  ┌──────────────────┐        │
-│  │ 12/28                  │  │ •••              │        │
-│  └────────────────────────┘  └──────────────────┘        │
-│                                                           │
-│  Notes                                                    │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │                                                     │ │
-│  └─────────────────────────────────────────────────────┘ │
-│                                                           │
-│  ┌─────────┐  ┌─────────┐  ┌────────────────────────┐   │
-│  │ Cancel  │  │ Delete  │  │       Save             │   │
-│  └─────────┘  └─────────┘  └────────────────────────┘   │
-└───────────────────────────────────────────────────────────┘
-```
+Settings and preferences:
+- **Account Section**:
+  - Current username display
+  - Change Password button
+  - Account type badge
+- **Appearance Section**:
+  - Theme selector (Light/Dark/System)
+- **Database Section**:
+  - Database location display
+  - Backup button
+- **About Section**:
+  - Version information
+  - License information
 
-### Features
-- Credit card specific fields
-- Encrypted card number and CVV
-- Expiry date field
-- Notes section
+![Settings Dialog](screenshots/11-settings-dialog.png)
 
 ---
 
-## Feature Highlights
+## Features & Functionality
 
-### 🔍 Enhanced Search Bar
-- **Icon**: Magnifying glass emoji for visual clarity
-- **Placeholder**: "Search passwords by title or username..."
-- **Real-time**: Filters as you type
-- **Scope**: Searches both title and username fields
+### 12. Search and Filter
+**File**: `screenshots/12-search-and-filter.png`
 
-### 🔐 Security Features
-- **AES-256-CBC Encryption**: For all sensitive data
-- **PBKDF2-SHA256 Hashing**: 10,000 iterations
-- **Unique Salts**: Per-user and per-value
-- **Visual Indicators**: Password strength bars
+Enhanced search functionality:
+- Search bar with magnifying glass icon
+- Placeholder text: "Search entries..."
+- Type filter buttons highlighted
+- Real-time filtering as you type
+- Results update dynamically
 
-### 👥 Account Types
-- **Admin**: Full control, can restrict child access
-- **User**: Standard access to own vaults
-- **Child**: Can be restricted by admins
-
-### 🎨 UI Design Principles
-- Clean, modern aesthetic
-- Consistent color scheme
-- Rounded corners (6px radius)
-- Intuitive navigation
-- Real-time feedback
-
-### 🛠️ Password Tools
-- **Generator**: 8-64 character range
-- **Strength Meter**: Color-coded (Weak/Medium/Strong)
-- **Reveal/Hide**: Toggle visibility
-- **Copy**: One-click clipboard
+![Search and Filter](screenshots/12-search-and-filter.png)
 
 ---
 
-## Color Scheme
+### 13. Password Reveal
+**File**: `screenshots/13-password-reveal.png`
 
-```
-Primary Blue:   #2563EB
-Secondary Gray: #475569
-Background:     #F8FAFC
-Surface White:  #FFFFFF
-Text Dark:      #1E293B
-Border:         #E2E8F0
-Hover Blue:     #3B82F6
-Danger Red:     #DC2626
-Success Green:  #16A34A
-```
+Password visibility toggle:
+- Eye icon button next to password field
+- Password shown in plain text when revealed
+- Quick toggle between hidden (dots) and visible
+
+![Password Reveal](screenshots/13-password-reveal.png)
 
 ---
 
-## Responsive Behavior
+### 14. Password Strength Indicator
+**File**: `screenshots/14-password-strength-indicator.png`
 
-### Main Window
-- **Width**: 1200px
-- **Height**: 700px
-- **Sidebar**: 250px fixed
-- **Content**: Flexible width
+Real-time password strength feedback:
+- Visual bar indicator
+- Color-coded strength:
+  - Red: Weak (< 6 characters)
+  - Yellow: Medium (6-11 characters)
+  - Green: Strong (12+ characters with variety)
+- Text label: "Weak", "Medium", or "Strong"
 
-### Dialogs
-- **Entry Dialog**: 600x650px
-- **Generator**: 450x450px
-- **Settings**: 600x500px
-- **Create Account**: 400x450px
-
----
-
-## Accessibility
-
-- Clear visual hierarchy
-- Sufficient color contrast
-- Keyboard navigation support
-- Descriptive placeholder text
-- Icon + text labels
+![Password Strength Indicator](screenshots/14-password-strength-indicator.png)
 
 ---
 
-*Note: These are UI mockups representing the actual WPF application. The application needs to be run on Windows to see the actual rendered interface.*
+## Themes
+
+### 15. Dark Theme
+**File**: `screenshots/15-dark-theme.png`
+
+Application in dark mode:
+- Dark background colors
+- High contrast for readability
+- Optimized for low-light environments
+- Consistent theming across all dialogs
+
+![Dark Theme](screenshots/15-dark-theme.png)
+
+---
+
+### 16. Light Theme
+**File**: `screenshots/16-light-theme.png`
+
+Application in light mode (default):
+- Bright, clean interface
+- Professional appearance
+- Default theme on first launch
+
+![Light Theme](screenshots/16-light-theme.png)
+
+---
+
+## Account Types & Permissions
+
+### 17. Admin Account View
+**File**: `screenshots/17-admin-view.png`
+
+Admin account features:
+- Full access to all vaults
+- Can create access restrictions
+- User management capabilities
+- All standard features
+
+**Login**: `admin` / `Admin123!`
+
+![Admin View](screenshots/17-admin-view.png)
+
+---
+
+### 18. User Account View
+**File**: `screenshots/18-user-view.png`
+
+Standard user account:
+- Personal vaults
+- Full password management features
+- Cannot manage access restrictions
+- Cannot access restricted entries
+
+**Login**: `john` / `John123!`
+
+![User View](screenshots/18-user-view.png)
+
+---
+
+### 19. Child Account View
+**File**: `screenshots/19-child-view.png`
+
+Child account with restrictions:
+- Limited access based on admin settings
+- Some entries may be blocked
+- Can view and use allowed entries
+- Cannot modify restrictions
+
+**Login**: `sarah` / `Sarah123!`
+
+![Child View](screenshots/19-child-view.png)
+
+---
+
+### 20. Access Restriction Settings
+**File**: `screenshots/20-access-restriction.png`
+
+Admin-only access restriction management:
+- Select entries to restrict
+- Choose which child users to restrict
+- Manage existing restrictions
+- Granular permission control
+
+![Access Restriction](screenshots/20-access-restriction.png)
+
+---
+
+## How to Capture Screenshots
+
+### Prerequisites
+- Windows operating system (WPF application)
+- .NET 8.0 SDK installed
+- Application built and ready to run
+
+### Quick Start
+
+1. **Build the application**:
+   ```bash
+   dotnet build
+   ```
+
+2. **Run the application**:
+   ```bash
+   dotnet run --project PasswordManager.UI
+   ```
+
+3. **Use the automated guide** (recommended):
+   ```powershell
+   .\Take-Screenshots.ps1
+   ```
+   
+   This PowerShell script will guide you through capturing each screenshot step-by-step.
+
+### Manual Screenshot Capture
+
+**Recommended Tools**:
+- Windows Snipping Tool (Win + Shift + S) - Built-in
+- ShareX - Free, feature-rich
+- Greenshot - Free, simple
+- Snagit - Professional (paid)
+
+**Guidelines**:
+- Use 1920x1080 or higher resolution
+- Capture full window including title bar
+- Ensure good contrast and readability
+- Use demo accounts (never real data)
+- Save as PNG format for best quality
+- Use consistent window sizes
+- Disable desktop notifications before capturing
+
+### Screenshot Checklist
+
+See `screenshots/README.md` for the complete list of required screenshots.
+
+---
+
+## Contributing Screenshots
+
+If you're updating screenshots:
+
+1. Follow the naming convention: `##-description.png`
+2. Use demo data only
+3. Ensure high quality (1080p+)
+4. Capture both light and dark themes where applicable
+5. Save in `screenshots/` directory
+6. Update this document if adding new screens
+
+---
+
+## Notes
+
+- All screenshots use demo accounts and sample data
+- Password Manager respects your privacy - no telemetry or data collection
+- Screenshots are taken on Windows 11 with .NET 8.0
+- Application design may evolve; screenshots will be updated accordingly
+
+---
+
+*Last Updated: [Date to be added when screenshots are captured]*
