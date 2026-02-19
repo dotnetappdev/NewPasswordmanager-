@@ -6,6 +6,7 @@ using PasswordManager.Core.Interfaces;
 using PasswordManager.Core.Services;
 using PasswordManager.Data;
 using PasswordManager.Data.Context;
+using PasswordManager.UI.Services;
 using PasswordManager.UI.Views;
 
 namespace PasswordManager.UI;
@@ -39,17 +40,34 @@ public partial class App : Application
         // Register services
         services.AddSingleton<IEncryptionService, EncryptionService>();
         services.AddSingleton<IPasswordGeneratorService, PasswordGeneratorService>();
+        services.AddSingleton<IThemeService, ThemeService>();
         services.AddScoped<DatabaseService>();
+        services.AddScoped<SeedDataService>();
 
         // Register views
         services.AddTransient<LoginWindow>();
         services.AddTransient<MainWindow>();
 
         ServiceProvider = services.BuildServiceProvider();
+
+        // Apply theme
+        var themeService = ServiceProvider.GetRequiredService<IThemeService>();
+        var savedTheme = themeService.LoadThemePreference();
+        themeService.ApplyTheme(savedTheme);
     }
 
-    private void Application_Startup(object sender, StartupEventArgs e)
+    private async void Application_Startup(object sender, StartupEventArgs e)
     {
+        // Initialize database and seed demo data
+        using (var scope = ServiceProvider.CreateScope())
+        {
+            var dbService = scope.ServiceProvider.GetRequiredService<DatabaseService>();
+            await dbService.InitializeDatabaseAsync();
+
+            var seedService = scope.ServiceProvider.GetRequiredService<SeedDataService>();
+            await seedService.SeedDemoDataAsync();
+        }
+
         var loginWindow = ServiceProvider.GetRequiredService<LoginWindow>();
         loginWindow.Show();
     }

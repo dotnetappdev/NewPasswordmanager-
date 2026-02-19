@@ -72,6 +72,20 @@
 
                 <Separator Margin="0,0,0,20"/>
 
+                <!-- Theme Settings -->
+                <TextBlock Text="Appearance" 
+                          FontSize="18" 
+                          FontWeight="SemiBold" 
+                          Margin="0,0,0,15"/>
+
+                <TextBlock Text="Theme" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <ComboBox x:Name="ThemeComboBox"
+                         Style="{StaticResource ModernComboBox}"
+                         SelectionChanged="ThemeComboBox_SelectionChanged"
+                         Margin="0,0,0,20"/>
+
+                <Separator Margin="0,0,0,20"/>
+
                 <!-- Database Info -->
                 <TextBlock Text="Database Information" 
                           FontSize="18" 

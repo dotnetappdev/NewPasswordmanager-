@@ -1,5 +1,7 @@
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using PasswordManager.Core.Enums;
 using PasswordManager.Core.Interfaces;
 using PasswordManager.Core.Models;
 using PasswordManager.Data.Context;
@@ -10,6 +12,7 @@ public partial class SettingsDialog : Window
 {
     private readonly PasswordManagerContext _context;
     private readonly IEncryptionService _encryptionService;
+    private readonly IThemeService _themeService;
     private readonly User _currentUser;
     private readonly string _masterPassword;
 
@@ -19,6 +22,8 @@ public partial class SettingsDialog : Window
         InitializeComponent();
         _context = context;
         _encryptionService = encryptionService;
+        _themeService = App.ServiceProvider.GetService(typeof(IThemeService)) as IThemeService 
+            ?? throw new InvalidOperationException("Theme service not found");
         _currentUser = currentUser;
         _masterPassword = masterPassword;
 
@@ -37,6 +42,28 @@ public partial class SettingsDialog : Window
         );
         var dbPath = Path.Combine(appDataPath, "passwordmanager.db");
         DatabasePathText.Text = $"Database Location: {dbPath}";
+
+        // Load theme settings
+        ThemeComboBox.ItemsSource = new[]
+        {
+            new { Name = "System", Value = AppTheme.System },
+            new { Name = "Light", Value = AppTheme.Light },
+            new { Name = "Dark", Value = AppTheme.Dark }
+        };
+        ThemeComboBox.DisplayMemberPath = "Name";
+        ThemeComboBox.SelectedValuePath = "Value";
+        
+        var currentTheme = _themeService.GetCurrentTheme();
+        ThemeComboBox.SelectedValue = currentTheme;
+    }
+
+    private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ThemeComboBox.SelectedValue is AppTheme theme)
+        {
+            _themeService.ApplyTheme(theme);
+            _themeService.SaveThemePreference(theme);
+        }
     }
 
     private async void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
