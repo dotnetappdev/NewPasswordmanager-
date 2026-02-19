@@ -176,12 +176,17 @@ public class ThemeService : IThemeService
 
     private void ApplyDarkTheme(ResourceDictionary dict)
     {
-        dict["PrimaryBrush"] = new SolidColorBrush(Color.FromRgb(0x3B, 0x82, 0xF6));
-        dict["SecondaryBrush"] = new SolidColorBrush(Color.FromRgb(0x94, 0xA3, 0xB8));
-        dict["BackgroundBrush"] = new SolidColorBrush(Color.FromRgb(0x0F, 0x17, 0x2A));
-        dict["SurfaceBrush"] = new SolidColorBrush(Color.FromRgb(0x1E, 0x29, 0x3B));
-        dict["TextBrush"] = new SolidColorBrush(Color.FromRgb(0xF1, 0xF5, 0xF9));
-        dict["BorderBrush"] = new SolidColorBrush(Color.FromRgb(0x33, 0x41, 0x55));
-        dict["HoverBrush"] = new SolidColorBrush(Color.FromRgb(0x60, 0xA5, 0xFA));
+        dict["PrimaryBrush"]    = new SolidColorBrush(Color.FromRgb(0x6E, 0x4E, 0xBF));
+        dict["SecondaryBrush"]  = new SolidColorBrush(Color.FromRgb(0x78, 0x78, 0xA0));
+        dict["BackgroundBrush"] = new SolidColorBrush(Color.FromRgb(0x1A, 0x1A, 0x24));
+        dict["SurfaceBrush"]    = new SolidColorBrush(Color.FromRgb(0x2A, 0x2A, 0x3C));
+        dict["TextBrush"]       = new SolidColorBrush(Color.FromRgb(0xE8, 0xE8, 0xF5));
+        dict["BorderBrush"]     = new SolidColorBrush(Color.FromRgb(0x35, 0x35, 0x4A));
+        dict["HoverBrush"]      = new SolidColorBrush(Color.FromRgb(0x2E, 0x2E, 0x44));
+        dict["SidebarBrush"]    = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x32));
+        dict["ListPaneBrush"]   = new SolidColorBrush(Color.FromRgb(0x1C, 0x1C, 0x28));
+        dict["DetailPaneBrush"] = new SolidColorBrush(Color.FromRgb(0x1E, 0x1E, 0x2C));
+        dict["SelectedBrush"]   = new SolidColorBrush(Color.FromRgb(0x5C, 0x3E, 0x9C));
+        dict["AccentBrush"]     = new SolidColorBrush(Color.FromRgb(0x4A, 0x8C, 0xF7));
     }
 }

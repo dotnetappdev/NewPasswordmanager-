@@ -52,9 +52,11 @@ public partial class App : Application
 
         ServiceProvider = services.BuildServiceProvider();
 
-        // Apply theme
+        // Apply theme - default to Dark on first run
         var themeService = ServiceProvider.GetRequiredService<IThemeService>();
         var savedTheme = themeService.LoadThemePreference();
+        if (savedTheme == Core.Enums.AppTheme.System)
+            savedTheme = Core.Enums.AppTheme.Dark;
         themeService.ApplyTheme(savedTheme);
     }
 
