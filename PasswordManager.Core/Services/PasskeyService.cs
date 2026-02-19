@@ -12,6 +12,11 @@ public class PasskeyService : IPasskeyService
         string userName, 
         string userHandle)
     {
+        // Note: In a full WebAuthn implementation, the relying party and user information
+        // would be included in the attestation object. For this password manager implementation,
+        // we store this metadata separately in the database and generate the cryptographic
+        // key pair here. The parameters are retained in the signature for future extensibility.
+        
         // Generate a unique credential ID
         var credentialId = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
         

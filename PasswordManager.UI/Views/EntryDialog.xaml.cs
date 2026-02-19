@@ -1,4 +1,5 @@
 using System.IO;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,6 @@ public partial class EntryDialog : Window
     private byte[]? _attachedFileData;
     private string? _attachedFileName;
     private bool _isPasswordRevealed = false;
-    private bool _passkeyGenerated = false;
     private string? _generatedPasskeyCredentialId;
     private string? _generatedPasskeyPublicKey;
     private string? _generatedPasskeyPrivateKey;
@@ -127,7 +127,6 @@ public partial class EntryDialog : Window
                 UserHandleTextBox.Text = _existingEntry.UserHandle ?? string.Empty;
                 if (!string.IsNullOrEmpty(_existingEntry.CredentialId))
                 {
-                    _passkeyGenerated = true;
                     PasskeyGeneratedText.Visibility = Visibility.Visible;
                     GeneratePasskeyButton.Content = "Regenerate Passkey Credential";
                 }
@@ -261,7 +260,7 @@ public partial class EntryDialog : Window
         // Auto-generate user handle if not provided
         if (string.IsNullOrEmpty(userHandle))
         {
-            userHandle = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(16));
+            userHandle = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
             UserHandleTextBox.Text = userHandle;
         }
 
@@ -278,7 +277,6 @@ public partial class EntryDialog : Window
         _generatedPasskeyCredentialId = credentialId;
         _generatedPasskeyPublicKey = publicKey;
         _generatedPasskeyPrivateKey = privateKey;
-        _passkeyGenerated = true;
         PasskeyGeneratedText.Visibility = Visibility.Visible;
         GeneratePasskeyButton.Content = "Regenerate Passkey Credential";
 
@@ -362,12 +360,6 @@ public partial class EntryDialog : Window
                     break;
 
                 case EntryType.Passkey:
-                    if (!_passkeyGenerated)
-                    {
-                        ShowError("Please generate a passkey credential before saving.");
-                        return;
-                    }
-
                     entry.RelyingPartyId = RelyingPartyIdTextBox.Text.Trim();
                     entry.RelyingPartyName = RelyingPartyNameTextBox.Text.Trim();
                     entry.Username = PasskeyUserNameTextBox.Text.Trim();
@@ -383,6 +375,13 @@ public partial class EntryDialog : Window
                         entry.EncryptedPrivateKey = _encryptionService.Encrypt(_generatedPasskeyPrivateKey, _masterPassword);
                         entry.Counter = 0;
                     }
+                    else if (_existingEntry == null)
+                    {
+                        // New passkey entry requires credential generation
+                        ShowError("Please generate a passkey credential before saving.");
+                        return;
+                    }
+                    // For existing entries without regeneration, keep existing credentials (no changes needed)
                     break;
             }
 
