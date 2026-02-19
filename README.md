@@ -9,7 +9,10 @@ A modern, secure password manager built with .NET 8 and WPF, following SOLID pri
 - **[SCREENSHOTS.md](SCREENSHOTS.md)** - High-quality screenshots of all application screens
 - **[FEATURES.md](FEATURES.md)** - Comprehensive feature showcase with examples
 - **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Implementation overview and statistics
-- **[SCREENSHOT_REQUIREMENTS.md](SCREENSHOT_REQUIREMENTS.md)** - Guide for capturing screenshots (Windows only)
+
+### Screenshot Documentation (Windows Only)
+- **[SCREENSHOT_QUICKSTART.md](SCREENSHOT_QUICKSTART.md)** - Quick start guide for capturing screenshots
+- **[SCREENSHOT_REQUIREMENTS.md](SCREENSHOT_REQUIREMENTS.md)** - Detailed capture guidelines and specifications
 
 ## Features
 
