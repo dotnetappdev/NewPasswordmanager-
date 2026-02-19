@@ -96,6 +96,22 @@ dotnet run --project PasswordManager.UI
 
 ### First Time Setup
 1. Launch the application
+2. Demo users are automatically created on first run:
+   - **Username:** `admin` | **Password:** `Admin123!` | **Role:** Admin
+   - **Username:** `john` | **Password:** `John123!` | **Role:** User
+   - **Username:** `sarah` | **Password:** `Sarah123!` | **Role:** Child
+3. Admin account includes sample password entries (GitHub, Gmail, Credit Card, WiFi Note)
+4. Or create your own account by clicking "Create New Account"
+
+### Theme Support
+- **Light Mode**: Default bright theme
+- **Dark Mode**: Optimized dark theme
+- **System Mode**: Auto-detects Windows theme setting
+- Change theme in Settings → Appearance → Theme
+- Theme preference is saved and persists across sessions
+
+### First Time Setup
+1. Launch the application
 2. Click "Create New Account"
 3. Enter username, password, and select account type
 4. A default "Personal" vault will be created automatically

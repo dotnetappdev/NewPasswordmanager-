@@ -7,7 +7,15 @@
 1. **Run the application**
    - Execute `PasswordManager.UI.exe` or run `dotnet run --project PasswordManager.UI`
    
-2. **Create your first account**
+2. **Use demo accounts (automatically created on first launch)**
+   - **Admin Account**: Username `admin`, Password `Admin123!`
+     - Includes sample entries (GitHub, Gmail, Visa card, WiFi password)
+   - **User Account**: Username `john`, Password `John123!`
+   - **Child Account**: Username `sarah`, Password `Sarah123!`
+   
+   OR
+   
+3. **Create your own account**
    - Click "Create New Account"
    - Enter a username (unique)
    - Enter a strong password (minimum 8 characters)
@@ -16,7 +24,7 @@
      - **User**: Standard user with personal vaults
      - **Child**: Limited access, can be restricted by admins
    
-3. **Login**
+4. **Login**
    - Select your account from the dropdown
    - Enter your password
    - Click "Sign In"
@@ -129,13 +137,19 @@ Click the "Settings" button in the top-right corner.
    - View account type
    - View creation date
 
-2. **Change Password**
+2. **Appearance (Theme)**
+   - **Light Mode**: Bright theme with blue accents
+   - **Dark Mode**: Dark theme optimized for low-light
+   - **System**: Auto-detects Windows theme setting
+   - Theme preference is saved automatically
+
+3. **Change Password**
    - Enter current password
    - Enter new password
    - Confirm new password
    - Click "Update Password"
 
-3. **Database Information**
+4. **Database Information**
    - View database file location
    - Located in: `%AppData%\PasswordManager\passwordmanager.db`
 
