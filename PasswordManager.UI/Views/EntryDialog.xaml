@@ -155,7 +155,7 @@
                            Margin="0,0,0,15"/>
 
                     <TextBlock x:Name="PasskeyGeneratedText" 
-                              Text="✓ Passkey credential generated and saved"
+                              Text="✓ Passkey credential generated (will be saved with entry)"
                               Foreground="Green"
                               FontWeight="SemiBold"
                               Visibility="Collapsed"

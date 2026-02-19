@@ -279,9 +279,6 @@ public partial class EntryDialog : Window
         _generatedPasskeyPrivateKey = privateKey;
         PasskeyGeneratedText.Visibility = Visibility.Visible;
         GeneratePasskeyButton.Content = "Regenerate Passkey Credential";
-
-        MessageBox.Show("Passkey credential generated successfully! The credential will be saved when you save this entry.", 
-            "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
     private void AttachFileButton_Click(object sender, RoutedEventArgs e)
