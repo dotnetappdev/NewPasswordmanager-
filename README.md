@@ -6,9 +6,13 @@ A modern, secure password manager built with .NET 8 and WPF, following SOLID pri
 
 - **[USER_GUIDE.md](USER_GUIDE.md)** - Complete user guide with step-by-step instructions
 - **[TECHNICAL_DOCS.md](TECHNICAL_DOCS.md)** - Technical architecture and developer documentation
-- **[SCREENSHOTS.md](SCREENSHOTS.md)** - Visual UI mockups and layout documentation
+- **[SCREENSHOTS.md](SCREENSHOTS.md)** - High-quality screenshots of all application screens
 - **[FEATURES.md](FEATURES.md)** - Comprehensive feature showcase with examples
 - **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Implementation overview and statistics
+
+### Screenshot Documentation (Windows Only)
+- **[SCREENSHOT_QUICKSTART.md](SCREENSHOT_QUICKSTART.md)** - Quick start guide for capturing screenshots
+- **[SCREENSHOT_REQUIREMENTS.md](SCREENSHOT_REQUIREMENTS.md)** - Detailed capture guidelines and specifications
 
 ## Features
 
@@ -110,12 +114,16 @@ dotnet run --project PasswordManager.UI
 - Change theme in Settings → Appearance → Theme
 - Theme preference is saved and persists across sessions
 
-### First Time Setup
-1. Launch the application
-2. Click "Create New Account"
-3. Enter username, password, and select account type
-4. A default "Personal" vault will be created automatically
-5. Start adding password entries!
+## Screenshots & Visual Documentation
+
+See **[SCREENSHOTS.md](SCREENSHOTS.md)** for detailed screenshots of all application screens and features.
+
+To capture new screenshots on Windows:
+```powershell
+.\Take-Screenshots.ps1
+```
+
+This interactive script guides you through capturing all 20 required screenshots. See **[SCREENSHOT_REQUIREMENTS.md](SCREENSHOT_REQUIREMENTS.md)** for detailed guidelines.
 
 ## Database Location
 
