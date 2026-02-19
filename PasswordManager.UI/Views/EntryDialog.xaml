@@ -1,210 +1,281 @@
 <Window x:Class="PasswordManager.UI.Views.EntryDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Password Entry" 
-        Height="650" Width="600"
+        Title="Password Entry"
+        Height="680" Width="650"
         WindowStartupLocation="CenterOwner"
-        Background="{StaticResource BackgroundBrush}">
-    
+        Background="{StaticResource DetailPaneBrush}">
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Border Style="{StaticResource Card}" Margin="20">
+        <Border Style="{StaticResource Card}" Margin="20"
+                Background="{StaticResource SurfaceBrush}">
             <StackPanel>
-                <TextBlock x:Name="TitleText" 
-                          Text="New Entry" 
-                          FontSize="20" 
-                          FontWeight="Bold" 
-                          Margin="0,0,0,20"/>
+                <TextBlock x:Name="TitleText"
+                           Text="New Entry"
+                           FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource TextBrush}"
+                           Margin="0,0,0,20"/>
 
                 <!-- Entry Type -->
-                <TextBlock Text="Entry Type" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                <ComboBox x:Name="TypeComboBox" 
-                         Style="{StaticResource ModernComboBox}"
-                         SelectionChanged="TypeComboBox_SelectionChanged"
-                         Margin="0,0,0,15"/>
+                <TextBlock Text="ENTRY TYPE"
+                           FontSize="11" FontWeight="SemiBold"
+                           Foreground="{StaticResource SecondaryBrush}"
+                           Margin="0,0,0,6"/>
+                <ComboBox x:Name="TypeComboBox"
+                          Style="{StaticResource ModernComboBox}"
+                          SelectionChanged="TypeComboBox_SelectionChanged"
+                          Margin="0,0,0,16"/>
 
                 <!-- Title -->
-                <TextBlock Text="Title" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                <TextBox x:Name="EntryTitleTextBox" 
-                        Style="{StaticResource ModernTextBox}"
-                        Margin="0,0,0,15"/>
+                <TextBlock Text="TITLE"
+                           FontSize="11" FontWeight="SemiBold"
+                           Foreground="{StaticResource SecondaryBrush}"
+                           Margin="0,0,0,6"/>
+                <TextBox x:Name="EntryTitleTextBox"
+                         Style="{StaticResource ModernTextBox}"
+                         Margin="0,0,0,16"/>
 
                 <!-- Login Fields -->
                 <StackPanel x:Name="LoginFields" Visibility="Collapsed">
-                    <TextBlock Text="Username" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="UsernameTextBox" 
-                            Style="{StaticResource ModernTextBox}"
-                            Margin="0,0,0,15"/>
+                    <TextBlock Text="USERNAME"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="UsernameTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <TextBlock Text="Email" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="EmailTextBox" 
-                            Style="{StaticResource ModernTextBox}"
-                            Margin="0,0,0,15"/>
+                    <TextBlock Text="EMAIL"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="EmailTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <TextBlock Text="Password" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <Grid Margin="0,0,0,5">
+                    <TextBlock Text="PASSWORD"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBox x:Name="PasswordTextBox" 
-                                Grid.Column="0"
-                                Style="{StaticResource ModernTextBox}"
-                                TextChanged="PasswordTextBox_TextChanged"
-                                Visibility="Collapsed"/>
-                        <PasswordBox x:Name="PasswordBoxControl" 
-                                    Grid.Column="0"
-                                    Style="{StaticResource ModernPasswordBox}"
-                                    PasswordChanged="PasswordBoxControl_PasswordChanged"/>
-                        <Button Grid.Column="1" 
-                               Content="👁" 
-                               Style="{StaticResource IconButton}"
-                               Click="RevealPasswordButton_Click"
-                               ToolTip="Reveal/Hide Password"
-                               Margin="5,0,0,0"/>
-                        <Button Grid.Column="2" 
-                               Content="📋" 
-                               Style="{StaticResource IconButton}"
-                               Click="CopyPasswordButton_Click"
-                               ToolTip="Copy Password"
-                               Margin="5,0,0,0"/>
+                        <TextBox x:Name="PasswordTextBox"
+                                 Grid.Column="0"
+                                 Style="{StaticResource ModernTextBox}"
+                                 TextChanged="PasswordTextBox_TextChanged"
+                                 Visibility="Collapsed"/>
+                        <PasswordBox x:Name="PasswordBoxControl"
+                                     Grid.Column="0"
+                                     Style="{StaticResource ModernPasswordBox}"
+                                     PasswordChanged="PasswordBoxControl_PasswordChanged"/>
+                        <Button Grid.Column="1"
+                                Content="👁"
+                                Style="{StaticResource IconButton}"
+                                Click="RevealPasswordButton_Click"
+                                ToolTip="Reveal/Hide Password"
+                                Margin="5,0,0,0"/>
+                        <Button Grid.Column="2"
+                                Content="📋"
+                                Style="{StaticResource IconButton}"
+                                Click="CopyPasswordButton_Click"
+                                ToolTip="Copy Password"
+                                Margin="5,0,0,0"/>
                     </Grid>
-                    
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="Generate Password" 
-                               Style="{StaticResource SecondaryButton}"
-                               Click="GeneratePasswordButton_Click"
-                               Margin="0,0,10,0"/>
-                        <ProgressBar x:Name="PasswordStrengthBar" 
-                                    Width="150" 
-                                    Height="10" 
-                                    Minimum="0" 
-                                    Maximum="100"
-                                    VerticalAlignment="Center"/>
-                        <TextBlock x:Name="PasswordStrengthText" 
-                                  VerticalAlignment="Center"
-                                  Margin="10,0,0,0"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Button Content="Generate Password"
+                                Style="{StaticResource SecondaryButton}"
+                                Click="GeneratePasswordButton_Click"
+                                Margin="0,0,10,0"/>
+                        <ProgressBar x:Name="PasswordStrengthBar"
+                                     Width="150" Height="10"
+                                     Minimum="0" Maximum="100"
+                                     VerticalAlignment="Center"/>
+                        <TextBlock x:Name="PasswordStrengthText"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource TextBrush}"
+                                   Margin="10,0,0,0"/>
                     </StackPanel>
 
-                    <TextBlock Text="URL" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="UrlTextBox" 
-                            Style="{StaticResource ModernTextBox}"
-                            Margin="0,0,0,15"/>
+                    <TextBlock Text="URL"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="UrlTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
                 </StackPanel>
 
                 <!-- Credit Card Fields -->
                 <StackPanel x:Name="CreditCardFields" Visibility="Collapsed">
-                    <TextBlock Text="Cardholder Name" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="CardholderNameTextBox" 
-                            Style="{StaticResource ModernTextBox}"
-                            Margin="0,0,0,15"/>
+                    <TextBlock Text="CARDHOLDER NAME"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="CardholderNameTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <TextBlock Text="Card Number" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="CardNumberTextBox" 
-                            Style="{StaticResource ModernTextBox}"
-                            Margin="0,0,0,15"/>
+                    <TextBlock Text="CARD NUMBER"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="CardNumberTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <Grid Margin="0,0,0,15">
+                    <Grid Margin="0,0,0,16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="12"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="Expiry Date (MM/YY)" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                            <TextBox x:Name="ExpiryDateTextBox" 
-                                    Style="{StaticResource ModernTextBox}"/>
+                            <TextBlock Text="EXPIRY (MM/YY)"
+                                       FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource SecondaryBrush}"
+                                       Margin="0,0,0,6"/>
+                            <TextBox x:Name="ExpiryDateTextBox"
+                                     Style="{StaticResource ModernTextBox}"/>
                         </StackPanel>
-
                         <StackPanel Grid.Column="2">
-                            <TextBlock Text="CVV" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                            <PasswordBox x:Name="CvvPasswordBox" 
-                                        Style="{StaticResource ModernPasswordBox}"/>
+                            <TextBlock Text="CVV"
+                                       FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource SecondaryBrush}"
+                                       Margin="0,0,0,6"/>
+                            <PasswordBox x:Name="CvvPasswordBox"
+                                         Style="{StaticResource ModernPasswordBox}"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
 
                 <!-- Passkey Fields -->
                 <StackPanel x:Name="PasskeyFields" Visibility="Collapsed">
-                    <TextBlock Text="Relying Party ID" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="RpIdTextBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+                    <TextBlock Text="RELYING PARTY ID"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="RpIdTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <TextBlock Text="Relying Party Name" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="RpNameTextBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+                    <TextBlock Text="RELYING PARTY NAME"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="RpNameTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <TextBlock Text="User Handle (auto-generated if empty)" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="UserHandleTextBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+                    <TextBlock Text="USER HANDLE (auto-generated if empty)"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="UserHandleTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             Margin="0,0,0,16"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="Generate Passkey" Style="{StaticResource SecondaryButton}" Click="GeneratePasskeyButton_Click"/>
-                        <TextBlock x:Name="PasskeyStatusText" Margin="12,6,0,0" Foreground="{StaticResource SecondaryBrush}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button Content="Generate Passkey"
+                                Style="{StaticResource SecondaryButton}"
+                                Click="GeneratePasskeyButton_Click"/>
+                        <TextBlock x:Name="PasskeyStatusText"
+                                   Margin="12,6,0,0"
+                                   Foreground="{StaticResource SecondaryBrush}"/>
                     </StackPanel>
 
-                    <TextBlock Text="Credential ID" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="CredentialIdTextBox" Style="{StaticResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,15"/>
+                    <TextBlock Text="CREDENTIAL ID"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="CredentialIdTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             IsReadOnly="True"
+                             Margin="0,0,0,16"/>
 
-                    <TextBlock Text="Public Key (PEM)" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <TextBox x:Name="PublicKeyTextBox" Style="{StaticResource ModernTextBox}" IsReadOnly="True" Height="120" AcceptsReturn="True" TextWrapping="Wrap"/>
+                    <TextBlock Text="PUBLIC KEY (PEM)"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <TextBox x:Name="PublicKeyTextBox"
+                             Style="{StaticResource ModernTextBox}"
+                             IsReadOnly="True"
+                             Height="120"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"/>
                 </StackPanel>
 
                 <!-- Notes -->
-                <TextBlock Text="Notes" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                <TextBox x:Name="NotesTextBox" 
-                        Style="{StaticResource ModernTextBox}"
-                        AcceptsReturn="True"
-                        Height="100"
-                        TextWrapping="Wrap"
-                        Margin="0,0,0,15"/>
+                <TextBlock Text="NOTES"
+                           FontSize="11" FontWeight="SemiBold"
+                           Foreground="{StaticResource SecondaryBrush}"
+                           Margin="0,16,0,6"/>
+                <TextBox x:Name="NotesTextBox"
+                         Style="{StaticResource ModernTextBox}"
+                         AcceptsReturn="True"
+                         Height="100"
+                         TextWrapping="Wrap"
+                         Margin="0,0,0,16"/>
 
                 <!-- File Attachment -->
                 <StackPanel x:Name="FileFields">
-                    <TextBlock Text="Attachment" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                    <Grid Margin="0,0,0,15">
+                    <TextBlock Text="ATTACHMENT"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="FileNameText" 
-                                  Grid.Column="0"
-                                  VerticalAlignment="Center"
-                                  Foreground="{StaticResource SecondaryBrush}"/>
-                        <Button Grid.Column="1" 
-                               Content="Attach File" 
-                               Style="{StaticResource SecondaryButton}"
-                               Click="AttachFileButton_Click"/>
+                        <TextBlock x:Name="FileNameText"
+                                   Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource SecondaryBrush}"/>
+                        <Button Grid.Column="1"
+                                Content="Attach File"
+                                Style="{StaticResource SecondaryButton}"
+                                Click="AttachFileButton_Click"/>
                     </Grid>
                 </StackPanel>
 
                 <!-- Favorite -->
-                <CheckBox x:Name="FavoriteCheckBox" 
-                         Content="Mark as Favorite"
-                         Margin="0,0,0,15"/>
+                <CheckBox x:Name="FavoriteCheckBox"
+                          Content="Mark as Favorite"
+                          Foreground="{StaticResource TextBrush}"
+                          Margin="0,0,0,16"/>
 
                 <!-- Admin Controls -->
                 <StackPanel x:Name="AdminControls" Visibility="Collapsed">
-                    <TextBlock Text="Access Restrictions (Admin Only)" 
-                              FontWeight="Bold" 
-                              Margin="0,0,0,10"/>
-                    <ListBox x:Name="RestrictedUsersListBox" 
-                            Height="100"
-                            SelectionMode="Multiple"
-                            Margin="0,0,0,15">
+                    <TextBlock Text="ACCESS RESTRICTIONS (Admin Only)"
+                               FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource SecondaryBrush}"
+                               Margin="0,0,0,6"/>
+                    <ListBox x:Name="RestrictedUsersListBox"
+                             Height="100"
+                             SelectionMode="Multiple"
+                             Background="{StaticResource SurfaceBrush}"
+                             Foreground="{StaticResource TextBrush}"
+                             Margin="0,0,0,16">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Username}"/>
+                                <TextBlock Text="{Binding Username}"
+                                           Foreground="{StaticResource TextBrush}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
 
-                <!-- Error Message -->
-                <TextBlock x:Name="ErrorText" 
-                          Foreground="{StaticResource DangerBrush}"
-                          TextWrapping="Wrap"
-                          Margin="0,0,0,15"
-                          Visibility="Collapsed"/>
+                <!-- Error -->
+                <TextBlock x:Name="ErrorText"
+                           Foreground="{StaticResource DangerBrush}"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,16"
+                           Visibility="Collapsed"/>
 
                 <!-- Buttons -->
                 <Grid>
@@ -215,23 +286,22 @@
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <Button Grid.Column="0" 
-                           Content="Cancel" 
-                           Style="{StaticResource SecondaryButton}"
-                           Click="CancelButton_Click"/>
+                    <Button Grid.Column="0"
+                            Content="Cancel"
+                            Style="{StaticResource SecondaryButton}"
+                            Click="CancelButton_Click"/>
                     <Button x:Name="DeleteButton"
-                           Grid.Column="2" 
-                           Content="Delete" 
-                           Background="{StaticResource DangerBrush}"
-                           Foreground="White"
-                           Style="{StaticResource SecondaryButton}"
-                           Click="DeleteButton_Click"
-                           Visibility="Collapsed"/>
-                    <Button Grid.Column="4" 
-                           Content="Save" 
-                           Style="{StaticResource PrimaryButton}"
-                           Click="SaveButton_Click"/>
+                            Grid.Column="2"
+                            Content="Delete"
+                            Background="{StaticResource DangerBrush}"
+                            Foreground="White"
+                            Style="{StaticResource SecondaryButton}"
+                            Click="DeleteButton_Click"
+                            Visibility="Collapsed"/>
+                    <Button Grid.Column="4"
+                            Content="Save"
+                            Style="{StaticResource PrimaryButton}"
+                            Click="SaveButton_Click"/>
                 </Grid>
             </StackPanel>
         </Border>
