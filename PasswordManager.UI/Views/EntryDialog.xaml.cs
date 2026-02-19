@@ -24,6 +24,8 @@ public partial class EntryDialog : Window
     private string? _attachedFileName;
     private bool _isPasswordRevealed = false;
     private bool _passkeyGenerated = false;
+    private string? _generatedPasskeyCredentialId;
+    private string? _generatedPasskeyPublicKey;
     private string? _generatedPasskeyPrivateKey;
 
     public EntryDialog(PasswordManagerContext context, IEncryptionService encryptionService,
@@ -273,6 +275,8 @@ public partial class EntryDialog : Window
         var (credentialId, publicKey, privateKey) = _passkeyService.GeneratePasskey(
             relyingPartyId, relyingPartyName, userName, userHandle);
 
+        _generatedPasskeyCredentialId = credentialId;
+        _generatedPasskeyPublicKey = publicKey;
         _generatedPasskeyPrivateKey = privateKey;
         _passkeyGenerated = true;
         PasskeyGeneratedText.Visibility = Visibility.Visible;
@@ -369,15 +373,14 @@ public partial class EntryDialog : Window
                     entry.Username = PasskeyUserNameTextBox.Text.Trim();
                     entry.UserHandle = UserHandleTextBox.Text.Trim();
 
-                    // Generate and store credential if new or regenerated
-                    if (!string.IsNullOrEmpty(_generatedPasskeyPrivateKey))
+                    // Store the generated credential (if new or regenerated)
+                    if (!string.IsNullOrEmpty(_generatedPasskeyPrivateKey) && 
+                        !string.IsNullOrEmpty(_generatedPasskeyCredentialId) && 
+                        !string.IsNullOrEmpty(_generatedPasskeyPublicKey))
                     {
-                        var (credentialId, publicKey, privateKey) = _passkeyService.GeneratePasskey(
-                            entry.RelyingPartyId, entry.RelyingPartyName, entry.Username, entry.UserHandle);
-                        
-                        entry.CredentialId = credentialId;
-                        entry.PublicKey = publicKey;
-                        entry.EncryptedPrivateKey = _encryptionService.Encrypt(privateKey, _masterPassword);
+                        entry.CredentialId = _generatedPasskeyCredentialId;
+                        entry.PublicKey = _generatedPasskeyPublicKey;
+                        entry.EncryptedPrivateKey = _encryptionService.Encrypt(_generatedPasskeyPrivateKey, _masterPassword);
                         entry.Counter = 0;
                     }
                     break;
