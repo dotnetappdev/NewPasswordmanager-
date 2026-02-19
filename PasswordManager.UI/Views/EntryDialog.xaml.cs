@@ -15,6 +15,7 @@ public partial class EntryDialog : Window
     private readonly PasswordManagerContext _context;
     private readonly IEncryptionService _encryptionService;
     private readonly IPasswordGeneratorService _passwordGeneratorService;
+    private readonly IPasskeyService _passkeyService;
     private readonly int _vaultId;
     private readonly string _masterPassword;
     private readonly User _currentUser;
@@ -22,15 +23,18 @@ public partial class EntryDialog : Window
     private byte[]? _attachedFileData;
     private string? _attachedFileName;
     private bool _isPasswordRevealed = false;
+    private bool _passkeyGenerated = false;
+    private string? _generatedPasskeyPrivateKey;
 
     public EntryDialog(PasswordManagerContext context, IEncryptionService encryptionService,
-        IPasswordGeneratorService passwordGeneratorService, int vaultId, string masterPassword,
+        IPasswordGeneratorService passwordGeneratorService, IPasskeyService passkeyService, int vaultId, string masterPassword,
         User currentUser, PasswordEntry? existingEntry = null)
     {
         InitializeComponent();
         _context = context;
         _encryptionService = encryptionService;
         _passwordGeneratorService = passwordGeneratorService;
+        _passkeyService = passkeyService;
         _vaultId = vaultId;
         _masterPassword = masterPassword;
         _currentUser = currentUser;
@@ -113,6 +117,19 @@ public partial class EntryDialog : Window
                     catch { }
                 }
                 break;
+
+            case EntryType.Passkey:
+                RelyingPartyIdTextBox.Text = _existingEntry.RelyingPartyId ?? string.Empty;
+                RelyingPartyNameTextBox.Text = _existingEntry.RelyingPartyName ?? string.Empty;
+                PasskeyUserNameTextBox.Text = _existingEntry.Username ?? string.Empty;
+                UserHandleTextBox.Text = _existingEntry.UserHandle ?? string.Empty;
+                if (!string.IsNullOrEmpty(_existingEntry.CredentialId))
+                {
+                    _passkeyGenerated = true;
+                    PasskeyGeneratedText.Visibility = Visibility.Visible;
+                    GeneratePasskeyButton.Content = "Regenerate Passkey Credential";
+                }
+                break;
         }
 
         if (!string.IsNullOrEmpty(_existingEntry.FileName))
@@ -142,6 +159,7 @@ public partial class EntryDialog : Window
         {
             LoginFields.Visibility = entryType == EntryType.Login ? Visibility.Visible : Visibility.Collapsed;
             CreditCardFields.Visibility = entryType == EntryType.CreditCard ? Visibility.Visible : Visibility.Collapsed;
+            PasskeyFields.Visibility = entryType == EntryType.Passkey ? Visibility.Visible : Visibility.Collapsed;
             FileFields.Visibility = entryType == EntryType.CustomFile ? Visibility.Visible : Visibility.Collapsed;
         }
     }
@@ -224,6 +242,46 @@ public partial class EntryDialog : Window
         UpdatePasswordStrength();
     }
 
+    private void GeneratePasskeyButton_Click(object sender, RoutedEventArgs e)
+    {
+        var relyingPartyId = RelyingPartyIdTextBox.Text.Trim();
+        var relyingPartyName = RelyingPartyNameTextBox.Text.Trim();
+        var userName = PasskeyUserNameTextBox.Text.Trim();
+        var userHandle = UserHandleTextBox.Text.Trim();
+
+        if (string.IsNullOrEmpty(relyingPartyId) || string.IsNullOrEmpty(userName))
+        {
+            MessageBox.Show("Relying Party ID and User Display Name are required to generate a passkey.", 
+                "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        // Auto-generate user handle if not provided
+        if (string.IsNullOrEmpty(userHandle))
+        {
+            userHandle = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(16));
+            UserHandleTextBox.Text = userHandle;
+        }
+
+        // Auto-fill relying party name if not provided
+        if (string.IsNullOrEmpty(relyingPartyName))
+        {
+            relyingPartyName = relyingPartyId;
+            RelyingPartyNameTextBox.Text = relyingPartyName;
+        }
+
+        var (credentialId, publicKey, privateKey) = _passkeyService.GeneratePasskey(
+            relyingPartyId, relyingPartyName, userName, userHandle);
+
+        _generatedPasskeyPrivateKey = privateKey;
+        _passkeyGenerated = true;
+        PasskeyGeneratedText.Visibility = Visibility.Visible;
+        GeneratePasskeyButton.Content = "Regenerate Passkey Credential";
+
+        MessageBox.Show("Passkey credential generated successfully! The credential will be saved when you save this entry.", 
+            "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
     private void AttachFileButton_Click(object sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog
@@ -296,6 +354,31 @@ public partial class EntryDialog : Window
                     if (!string.IsNullOrEmpty(CvvPasswordBox.Password))
                     {
                         entry.EncryptedCvv = _encryptionService.Encrypt(CvvPasswordBox.Password, _masterPassword);
+                    }
+                    break;
+
+                case EntryType.Passkey:
+                    if (!_passkeyGenerated)
+                    {
+                        ShowError("Please generate a passkey credential before saving.");
+                        return;
+                    }
+
+                    entry.RelyingPartyId = RelyingPartyIdTextBox.Text.Trim();
+                    entry.RelyingPartyName = RelyingPartyNameTextBox.Text.Trim();
+                    entry.Username = PasskeyUserNameTextBox.Text.Trim();
+                    entry.UserHandle = UserHandleTextBox.Text.Trim();
+
+                    // Generate and store credential if new or regenerated
+                    if (!string.IsNullOrEmpty(_generatedPasskeyPrivateKey))
+                    {
+                        var (credentialId, publicKey, privateKey) = _passkeyService.GeneratePasskey(
+                            entry.RelyingPartyId, entry.RelyingPartyName, entry.Username, entry.UserHandle);
+                        
+                        entry.CredentialId = credentialId;
+                        entry.PublicKey = publicKey;
+                        entry.EncryptedPrivateKey = _encryptionService.Encrypt(privateKey, _masterPassword);
+                        entry.Counter = 0;
                     }
                     break;
             }

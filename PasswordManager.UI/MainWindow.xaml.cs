@@ -14,18 +14,20 @@ public partial class MainWindow : Window
     private readonly PasswordManagerContext _context;
     private readonly IEncryptionService _encryptionService;
     private readonly IPasswordGeneratorService _passwordGeneratorService;
+    private readonly IPasskeyService _passkeyService;
     
     private User _currentUser = null!;
     private string _masterPassword = string.Empty;
     private EntryType? _currentFilter;
 
     public MainWindow(PasswordManagerContext context, IEncryptionService encryptionService,
-        IPasswordGeneratorService passwordGeneratorService)
+        IPasswordGeneratorService passwordGeneratorService, IPasskeyService passkeyService)
     {
         InitializeComponent();
         _context = context;
         _encryptionService = encryptionService;
         _passwordGeneratorService = passwordGeneratorService;
+        _passkeyService = passkeyService;
     }
 
     public void SetCurrentUser(User user, string masterPassword)
@@ -141,7 +143,7 @@ public partial class MainWindow : Window
         }
 
         var dialog = new Views.EntryDialog(_context, _encryptionService, _passwordGeneratorService, 
-            selectedVault.Id, _masterPassword, _currentUser);
+            _passkeyService, selectedVault.Id, _masterPassword, _currentUser);
         if (dialog.ShowDialog() == true)
         {
             _ = LoadEntriesAsync();
@@ -162,7 +164,7 @@ public partial class MainWindow : Window
         if (sender is Border border && border.Tag is PasswordEntry entry)
         {
             var dialog = new Views.EntryDialog(_context, _encryptionService, _passwordGeneratorService, 
-                entry.VaultId, _masterPassword, _currentUser, entry);
+                _passkeyService, entry.VaultId, _masterPassword, _currentUser, entry);
             if (dialog.ShowDialog() == true)
             {
                 _ = LoadEntriesAsync();

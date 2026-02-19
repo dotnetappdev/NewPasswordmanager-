@@ -32,6 +32,15 @@ public class PasswordEntry
     public string? FileName { get; set; }
     public byte[]? FileData { get; set; }
     
+    // Passkey fields
+    public string? RelyingPartyId { get; set; }
+    public string? RelyingPartyName { get; set; }
+    public string? UserHandle { get; set; }
+    public string? CredentialId { get; set; }
+    public string? EncryptedPrivateKey { get; set; }
+    public string? PublicKey { get; set; }
+    public int? Counter { get; set; }
+    
     public Vault Vault { get; set; } = null!;
     public ICollection<AccessRestriction> AccessRestrictions { get; set; } = new List<AccessRestriction>();
 }

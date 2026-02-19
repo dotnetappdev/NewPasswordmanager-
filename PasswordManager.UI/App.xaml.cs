@@ -41,6 +41,7 @@ public partial class App : Application
         services.AddSingleton<IEncryptionService, EncryptionService>();
         services.AddSingleton<IPasswordGeneratorService, PasswordGeneratorService>();
         services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<IPasskeyService, PasskeyService>();
         services.AddScoped<DatabaseService>();
         services.AddScoped<SeedDataService>();
 

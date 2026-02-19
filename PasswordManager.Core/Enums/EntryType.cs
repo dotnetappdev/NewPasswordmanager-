@@ -5,5 +5,6 @@ public enum EntryType
     Login,
     CreditCard,
     SecureNote,
-    CustomFile
+    CustomFile,
+    Passkey
 }

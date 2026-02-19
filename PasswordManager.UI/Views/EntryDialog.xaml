@@ -126,6 +126,42 @@
                     </Grid>
                 </StackPanel>
 
+                <!-- Passkey Fields -->
+                <StackPanel x:Name="PasskeyFields" Visibility="Collapsed">
+                    <TextBlock Text="Relying Party ID (e.g., example.com)" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="RelyingPartyIdTextBox" 
+                            Style="{StaticResource ModernTextBox}"
+                            Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Relying Party Name" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="RelyingPartyNameTextBox" 
+                            Style="{StaticResource ModernTextBox}"
+                            Margin="0,0,0,15"/>
+
+                    <TextBlock Text="User Display Name" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="PasskeyUserNameTextBox" 
+                            Style="{StaticResource ModernTextBox}"
+                            Margin="0,0,0,15"/>
+
+                    <TextBlock Text="User Handle (Unique ID)" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="UserHandleTextBox" 
+                            Style="{StaticResource ModernTextBox}"
+                            Margin="0,0,0,15"/>
+
+                    <Button Content="Generate Passkey Credential" 
+                           x:Name="GeneratePasskeyButton"
+                           Style="{StaticResource PrimaryButton}"
+                           Click="GeneratePasskeyButton_Click"
+                           Margin="0,0,0,15"/>
+
+                    <TextBlock x:Name="PasskeyGeneratedText" 
+                              Text="✓ Passkey credential generated and saved"
+                              Foreground="Green"
+                              FontWeight="SemiBold"
+                              Visibility="Collapsed"
+                              Margin="0,0,0,15"/>
+                </StackPanel>
+
                 <!-- Notes -->
                 <TextBlock Text="Notes" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <TextBox x:Name="NotesTextBox" 
