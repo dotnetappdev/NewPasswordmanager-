@@ -161,7 +161,7 @@
                              TextChanged="SearchBox_TextChanged"
                              VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="1"
-                               Text="Search…"
+                               Text="Search passwords…"
                                FontSize="13"
                                Foreground="{StaticResource SecondaryBrush}"
                                Padding="0,10,10,10"

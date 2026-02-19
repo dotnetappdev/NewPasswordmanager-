@@ -18,8 +18,10 @@
     <SolidColorBrush x:Key="BorderBrush"     Color="#35354A"/>
     <SolidColorBrush x:Key="HoverBrush"      Color="#2E2E44"/>
     <SolidColorBrush x:Key="SelectedBrush"   Color="#5C3E9C"/>
-    <SolidColorBrush x:Key="DangerBrush"     Color="#E05252"/>
-    <SolidColorBrush x:Key="SuccessBrush"    Color="#52BE7F"/>
+    <SolidColorBrush x:Key="DangerBrush"          Color="#E05252"/>
+    <SolidColorBrush x:Key="SuccessBrush"         Color="#52BE7F"/>
+    <SolidColorBrush x:Key="AccentHoverBrush"     Color="#3A7CE6"/>
+    <SolidColorBrush x:Key="AccentPressedBrush"   Color="#2A6CD6"/>
 
     <!-- Sidebar Nav Button -->
     <Style x:Key="SidebarNavItem" TargetType="Button">
@@ -150,10 +152,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="bd" Property="Background" Value="#3A7CE6"/>
+                            <Setter TargetName="bd" Property="Background" Value="{StaticResource AccentHoverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="bd" Property="Background" Value="#2A6CD6"/>
+                            <Setter TargetName="bd" Property="Background" Value="{StaticResource AccentPressedBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
