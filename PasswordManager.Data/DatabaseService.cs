@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using PasswordManager.Data.Context;
 
 namespace PasswordManager.Data;
 
 public class DatabaseService
 {
-    private readonly DbContext _context;
+    private readonly PasswordManagerContext _context;
 
-    public DatabaseService(DbContext context)
+    public DatabaseService(PasswordManagerContext context)
     {
         _context = context;
     }

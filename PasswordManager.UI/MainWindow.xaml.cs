@@ -6,6 +6,8 @@ using PasswordManager.Core.Enums;
 using PasswordManager.Core.Interfaces;
 using PasswordManager.Core.Models;
 using PasswordManager.Data.Context;
+using PasswordManager.UI.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PasswordManager.UI;
 
@@ -132,6 +134,12 @@ public partial class MainWindow : Window
         await LoadEntriesAsync();
     }
 
+    private async void FilterPasskey_Click(object sender, RoutedEventArgs e)
+    {
+        _currentFilter = EntryType.Passkey;
+        await LoadEntriesAsync();
+    }
+
     private void NewEntryButton_Click(object sender, RoutedEventArgs e)
     {
         if (VaultsListBox.SelectedItem is not Vault selectedVault)
@@ -179,7 +187,7 @@ public partial class MainWindow : Window
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
         var loginWindow = new Views.LoginWindow(_context, _encryptionService, 
-            new Data.DatabaseService(_context));
+            new Data.DatabaseService(_context), App.ServiceProvider.GetRequiredService<MasterKeyService>());
         loginWindow.Show();
         Close();
     }

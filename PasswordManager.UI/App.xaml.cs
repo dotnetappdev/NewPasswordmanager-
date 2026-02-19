@@ -17,8 +17,8 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
         ConfigureServices();
+        base.OnStartup(e);
     }
 
     private void ConfigureServices()
@@ -41,6 +41,8 @@ public partial class App : Application
         services.AddSingleton<IEncryptionService, EncryptionService>();
         services.AddSingleton<IPasswordGeneratorService, PasswordGeneratorService>();
         services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<MasterKeyService>();
+        services.AddScoped<PasskeyService>();
         services.AddScoped<DatabaseService>();
         services.AddScoped<SeedDataService>();
 

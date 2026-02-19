@@ -126,6 +126,29 @@
                     </Grid>
                 </StackPanel>
 
+                <!-- Passkey Fields -->
+                <StackPanel x:Name="PasskeyFields" Visibility="Collapsed">
+                    <TextBlock Text="Relying Party ID" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="RpIdTextBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Relying Party Name" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="RpNameTextBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="User Handle (auto-generated if empty)" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="UserHandleTextBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="Generate Passkey" Style="{StaticResource SecondaryButton}" Click="GeneratePasskeyButton_Click"/>
+                        <TextBlock x:Name="PasskeyStatusText" Margin="12,6,0,0" Foreground="{StaticResource SecondaryBrush}"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Credential ID" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="CredentialIdTextBox" Style="{StaticResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Public Key (PEM)" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBox x:Name="PublicKeyTextBox" Style="{StaticResource ModernTextBox}" IsReadOnly="True" Height="120" AcceptsReturn="True" TextWrapping="Wrap"/>
+                </StackPanel>
+
                 <!-- Notes -->
                 <TextBlock Text="Notes" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <TextBox x:Name="NotesTextBox" 

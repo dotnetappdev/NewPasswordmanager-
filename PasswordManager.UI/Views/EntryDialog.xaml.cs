@@ -7,6 +7,7 @@ using PasswordManager.Core.Enums;
 using PasswordManager.Core.Interfaces;
 using PasswordManager.Core.Models;
 using PasswordManager.Data.Context;
+using PasswordManager.Data;
 
 namespace PasswordManager.UI.Views;
 
@@ -22,10 +23,13 @@ public partial class EntryDialog : Window
     private byte[]? _attachedFileData;
     private string? _attachedFileName;
     private bool _isPasswordRevealed = false;
+    // Passkey generation state
+    private readonly PasskeyService? _passkeyService;
+    private PasskeyService.GeneratedPasskey? _generatedPasskey;
 
     public EntryDialog(PasswordManagerContext context, IEncryptionService encryptionService,
         IPasswordGeneratorService passwordGeneratorService, int vaultId, string masterPassword,
-        User currentUser, PasswordEntry? existingEntry = null)
+        User currentUser, PasswordEntry? existingEntry = null, PasskeyService? passkeyService = null)
     {
         InitializeComponent();
         _context = context;
@@ -35,6 +39,7 @@ public partial class EntryDialog : Window
         _masterPassword = masterPassword;
         _currentUser = currentUser;
         _existingEntry = existingEntry;
+        _passkeyService = passkeyService;
 
         InitializeDialog();
     }
@@ -143,6 +148,7 @@ public partial class EntryDialog : Window
             LoginFields.Visibility = entryType == EntryType.Login ? Visibility.Visible : Visibility.Collapsed;
             CreditCardFields.Visibility = entryType == EntryType.CreditCard ? Visibility.Visible : Visibility.Collapsed;
             FileFields.Visibility = entryType == EntryType.CustomFile ? Visibility.Visible : Visibility.Collapsed;
+            PasskeyFields.Visibility = entryType == EntryType.Passkey ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 
@@ -171,6 +177,35 @@ public partial class EntryDialog : Window
         {
             Clipboard.SetText(password);
             MessageBox.Show("Password copied to clipboard!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+
+    private void GeneratePasskeyButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (_passkeyService == null)
+        {
+            MessageBox.Show("Passkey generation is not available.", "Passkey", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        try
+        {
+            // Generate passkey protected with the current master password
+            _generatedPasskey = _passkeyService.GeneratePasskey(_masterPassword);
+
+            // If user handle wasn't provided, fill with generated value
+            if (string.IsNullOrWhiteSpace(UserHandleTextBox.Text))
+            {
+                UserHandleTextBox.Text = _generatedPasskey.UserHandleBase64;
+            }
+
+            CredentialIdTextBox.Text = _generatedPasskey.CredentialIdBase64;
+            PublicKeyTextBox.Text = _generatedPasskey.PublicKeyPem;
+            PasskeyStatusText.Text = "Passkey generated (not yet saved)";
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error generating passkey: {ex.Message}", "Passkey", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -296,6 +331,21 @@ public partial class EntryDialog : Window
                     if (!string.IsNullOrEmpty(CvvPasswordBox.Password))
                     {
                         entry.EncryptedCvv = _encryptionService.Encrypt(CvvPasswordBox.Password, _masterPassword);
+                    }
+                    break;
+
+                // passkey handled separately when saving
+                case EntryType.Passkey:
+                    // If a passkey has been generated in this dialog, save its values
+                    if (_generatedPasskey != null)
+                    {
+                        entry.RelyingPartyId = RpIdTextBox.Text?.Trim();
+                        entry.RelyingPartyName = RpNameTextBox.Text?.Trim();
+                        entry.UserHandle = string.IsNullOrWhiteSpace(UserHandleTextBox.Text) ? _generatedPasskey.UserHandleBase64 : UserHandleTextBox.Text.Trim();
+                        entry.CredentialId = _generatedPasskey.CredentialIdBase64;
+                        entry.PublicKeyPem = _generatedPasskey.PublicKeyPem;
+                        entry.EncryptedPrivateKey = _generatedPasskey.EncryptedPrivateKey;
+                        entry.Counter = _generatedPasskey.Counter;
                     }
                     break;
             }

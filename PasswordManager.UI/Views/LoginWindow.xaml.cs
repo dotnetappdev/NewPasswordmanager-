@@ -7,22 +7,27 @@ using PasswordManager.Core.Interfaces;
 using PasswordManager.Core.Models;
 using PasswordManager.Data;
 using PasswordManager.Data.Context;
+using PasswordManager.UI.Services;
 
 namespace PasswordManager.UI.Views;
 
 public partial class LoginWindow : Window
 {
+    private CreateAccountControl? _createAccountControl;
+
     private readonly PasswordManagerContext _context;
     private readonly IEncryptionService _encryptionService;
     private readonly DatabaseService _databaseService;
+    private readonly MasterKeyService _masterKeyService;
 
     public LoginWindow(PasswordManagerContext context, IEncryptionService encryptionService, 
-        DatabaseService databaseService)
+        DatabaseService databaseService, MasterKeyService masterKeyService)
     {
         InitializeComponent();
         _context = context;
         _encryptionService = encryptionService;
         _databaseService = databaseService;
+        _masterKeyService = masterKeyService;
         
         Loaded += LoginWindow_Loaded;
     }
@@ -81,16 +86,47 @@ public partial class LoginWindow : Window
 
     private async void CreateAccountButton_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new CreateAccountDialog(_context, _encryptionService);
-        if (dialog.ShowDialog() == true)
+        // Show embedded create-account control in overlay
+        if (CreateAccountOverlay.Visibility == Visibility.Visible) return;
+
+        _createAccountControl = new CreateAccountControl(_context, _encryptionService);
+        _createAccountControl.AccountSaved += async (s, ev) =>
         {
+            CreateAccountOverlay.Visibility = Visibility.Collapsed;
+            CreateAccountHost.Content = null;
             await LoadUsersAsync();
-        }
+        };
+        _createAccountControl.Cancelled += (s, ev) =>
+        {
+            CreateAccountOverlay.Visibility = Visibility.Collapsed;
+            CreateAccountHost.Content = null;
+        };
+
+        CreateAccountHost.Content = _createAccountControl;
+        CreateAccountOverlay.Visibility = Visibility.Visible;
     }
 
     private void ShowError(string message)
     {
         ErrorText.Text = message;
         ErrorText.Visibility = Visibility.Visible;
+    }
+
+    private void UseMasterKey_Click(object sender, RoutedEventArgs e)
+    {
+        if (!_masterKeyService.HasMasterKey())
+        {
+            MessageBox.Show("No master key is configured. Set one in Settings.", "Master Key", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var dialog = new MasterKeyDialog(_masterKeyService) { Owner = this };
+        if (dialog.ShowDialog() == true)
+        {
+            // unlocked via master key
+            var mainWindow = App.ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+            Close();
+        }
     }
 }

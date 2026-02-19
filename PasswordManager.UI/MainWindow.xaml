@@ -166,6 +166,7 @@
                     <Button Content="Credit Card" Click="FilterCreditCard_Click" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
                     <Button Content="Secure Notes" Click="FilterNotes_Click" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
                     <Button Content="Files" Click="FilterFiles_Click" Style="{StaticResource SecondaryButton}"/>
+                    <Button Content="Passkeys" Click="FilterPasskey_Click" Style="{StaticResource SecondaryButton}" Margin="0,0,0,0"/>
                 </StackPanel>
 
                 <!-- Entries List -->

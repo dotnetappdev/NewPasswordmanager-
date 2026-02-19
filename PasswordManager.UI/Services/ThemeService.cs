@@ -11,6 +11,7 @@ namespace PasswordManager.UI.Services;
 public class ThemeService : IThemeService
 {
     private AppTheme _currentTheme = AppTheme.System;
+    private AppAccent _currentAccent = AppAccent.Default;
     private readonly string _settingsPath;
 
     public ThemeService()
@@ -20,7 +21,7 @@ public class ThemeService : IThemeService
             "PasswordManager"
         );
         Directory.CreateDirectory(appDataPath);
-        _settingsPath = Path.Combine(appDataPath, "theme.settings");
+        _settingsPath = Path.Combine(appDataPath, "appearance.settings");
     }
 
     public void ApplyTheme(AppTheme theme)
@@ -30,7 +31,7 @@ public class ThemeService : IThemeService
         // Determine which theme to apply
         var effectiveTheme = theme == AppTheme.System ? GetSystemTheme() : theme;
 
-        // Apply theme to application
+        // Apply theme to application (also apply accent)
         Application.Current.Dispatcher.Invoke(() =>
         {
             var app = Application.Current;
@@ -46,6 +47,9 @@ public class ThemeService : IThemeService
                 {
                     ApplyLightTheme(dict);
                 }
+
+                // Apply accent after base theme
+                ApplyAccent(_currentAccent);
             }
         });
     }
@@ -82,7 +86,10 @@ public class ThemeService : IThemeService
     {
         try
         {
-            File.WriteAllText(_settingsPath, ((int)theme).ToString());
+            // Save both theme and accent into a small JSON blob
+            var obj = new { theme = (int)theme, accent = (int)_currentAccent };
+            var json = System.Text.Json.JsonSerializer.Serialize(obj);
+            File.WriteAllText(_settingsPath, json);
         }
         catch
         {
@@ -97,8 +104,13 @@ public class ThemeService : IThemeService
             if (File.Exists(_settingsPath))
             {
                 var content = File.ReadAllText(_settingsPath);
-                if (int.TryParse(content, out int themeValue))
+                var doc = System.Text.Json.JsonDocument.Parse(content);
+                if (doc.RootElement.TryGetProperty("theme", out var themeProp) && themeProp.TryGetInt32(out int themeValue))
                 {
+                    if (doc.RootElement.TryGetProperty("accent", out var accentProp) && accentProp.TryGetInt32(out int accentValue))
+                    {
+                        _currentAccent = (AppAccent)accentValue;
+                    }
                     return (AppTheme)themeValue;
                 }
             }
@@ -109,6 +121,46 @@ public class ThemeService : IThemeService
         }
 
         return AppTheme.System;
+    }
+
+    public void ApplyAccent(AppAccent accent)
+    {
+        _currentAccent = accent;
+
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            var app = Application.Current;
+            var dict = app.Resources.MergedDictionaries.FirstOrDefault();
+            if (dict == null) return;
+
+            switch (accent)
+            {
+                case AppAccent.Windows11Blue:
+                    dict["PrimaryBrush"] = new SolidColorBrush(Color.FromRgb(0x00, 0x78, 0xD4)); // Windows blue
+                    dict["HoverBrush"] = new SolidColorBrush(Color.FromRgb(0x00, 0x78, 0xD4));
+                    break;
+                default:
+                    // leave as-is or re-apply theme defaults
+                    var effectiveTheme = _currentTheme == AppTheme.System ? GetSystemTheme() : _currentTheme;
+                    if (effectiveTheme == AppTheme.Dark) ApplyDarkTheme(dict); else ApplyLightTheme(dict);
+                    break;
+            }
+        });
+    }
+
+    public AppAccent GetCurrentAccent() => _currentAccent;
+
+    public void SaveAccentPreference(AppAccent accent)
+    {
+        _currentAccent = accent;
+        SaveThemePreference(_currentTheme);
+    }
+
+    public AppAccent LoadAccentPreference()
+    {
+        // LoadThemePreference already populates _currentAccent when possible
+        LoadThemePreference();
+        return _currentAccent;
     }
 
     private void ApplyLightTheme(ResourceDictionary dict)
