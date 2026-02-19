@@ -161,6 +161,9 @@ dotnet run --project PasswordManager.UI
 - `README.md` - Project overview and features
 - `USER_GUIDE.md` - End-user instructions
 - `TECHNICAL_DOCS.md` - Developer documentation
+- `SCREENSHOTS.md` - Visual UI mockups and interface layouts
+- `FEATURES.md` - Comprehensive feature showcase with examples
+- `IMPLEMENTATION_SUMMARY.md` - Implementation overview and statistics
 - `.gitignore` - Build artifacts exclusion
 
 ### Core Business Logic

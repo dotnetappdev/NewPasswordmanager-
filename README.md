@@ -2,6 +2,14 @@
 
 A modern, secure password manager built with .NET 8 and WPF, following SOLID principles.
 
+## 📚 Documentation
+
+- **[USER_GUIDE.md](USER_GUIDE.md)** - Complete user guide with step-by-step instructions
+- **[TECHNICAL_DOCS.md](TECHNICAL_DOCS.md)** - Technical architecture and developer documentation
+- **[SCREENSHOTS.md](SCREENSHOTS.md)** - Visual UI mockups and layout documentation
+- **[FEATURES.md](FEATURES.md)** - Comprehensive feature showcase with examples
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Implementation overview and statistics
+
 ## Features
 
 ### 🔐 Security
