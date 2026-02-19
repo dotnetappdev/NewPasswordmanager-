@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using System.Text;
 using PasswordManager.Core.Interfaces;
 
 namespace PasswordManager.Core.Services;

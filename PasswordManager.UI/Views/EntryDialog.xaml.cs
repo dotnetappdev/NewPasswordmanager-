@@ -13,6 +13,8 @@ namespace PasswordManager.UI.Views;
 
 public partial class EntryDialog : Window
 {
+    private const int UserHandleBytesLength = 16;
+    
     private readonly PasswordManagerContext _context;
     private readonly IEncryptionService _encryptionService;
     private readonly IPasswordGeneratorService _passwordGeneratorService;
@@ -260,7 +262,7 @@ public partial class EntryDialog : Window
         // Auto-generate user handle if not provided
         if (string.IsNullOrEmpty(userHandle))
         {
-            userHandle = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
+            userHandle = Convert.ToBase64String(RandomNumberGenerator.GetBytes(UserHandleBytesLength));
             UserHandleTextBox.Text = userHandle;
         }
 
