@@ -1,7 +1,7 @@
 <Window x:Class="PasswordManager.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Password Manager — Modern Dark"
+        Title="Password Manager"
         Height="720" Width="1200"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource BackgroundBrush}">
