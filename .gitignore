@@ -57,3 +57,10 @@ $RECYCLE.BIN/
 
 # Mac
 .DS_Store
+
+# React Native / Expo (PasswordManagerMobile)
+PasswordManagerMobile/node_modules/
+PasswordManagerMobile/.expo/
+PasswordManagerMobile/.expo-shared/
+PasswordManagerMobile/dist/
+PasswordManagerMobile/web-build/
